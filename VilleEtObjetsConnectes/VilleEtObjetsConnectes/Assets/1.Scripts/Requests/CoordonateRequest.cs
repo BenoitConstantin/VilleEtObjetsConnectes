@@ -51,6 +51,8 @@ public class CoordonateRequest : MonoBehaviour {
         if (JNode["time"].AsInt < lastUpdate)
             yield return null;
 
+        float deltaTime = JNode["time"].AsInt - lastUpdate;
+
         lastUpdate = JNode["time"].AsInt;
 
         JNode = JNode["players"];
@@ -62,7 +64,7 @@ public class CoordonateRequest : MonoBehaviour {
             {
                 if(p.Id == JNode[i]["id"].AsInt)
                 {
-                    p.MoveTo(new Vector2(JNode[i]["x"].AsFloat, JNode[i]["y"].AsFloat), timeBetween2Update);
+                    p.MoveTo(new Vector2(JNode[i]["x"].AsFloat, JNode[i]["y"].AsFloat), deltaTime / 1000f);
                 }
             }
         } 
