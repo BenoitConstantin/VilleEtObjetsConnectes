@@ -152,6 +152,7 @@ MonoBehaviour:
   named: 
   subStatesList: []
   gameManager: {fileID: 114000012426458244}
+  initialGamePosition: {x: 0, y: 0}
 --- !u!114 &114000011909891482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,7 +198,6 @@ MonoBehaviour:
     defaultParent: {fileID: 4000011912499424}
   prefixPooledScene: Pooled_
   poolSceneList: []
-  mergedSceneName: PooledMergedScene
 --- !u!114 &114000012338020138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627128e2134cbc5418025fd57631c89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetween2Update: 0.25
+  timeBetween2Update: 1
 --- !u!114 &114000012426458244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,6 +238,8 @@ MonoBehaviour:
   serverAddress: 10.1.62.79:5000
   stateMachine: {fileID: 114000012483660780}
   players: []
+  playerPrefab: {fileID: 1000011744817400, guid: 89ce14e37e729944fbbfca13e4990bed,
+    type: 2}
 --- !u!114 &114000012483660780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,6 +280,7 @@ MonoBehaviour:
   gameManager: {fileID: 114000012426458244}
   timeOnSplashScreen: 1.5
   touchPlaySceneName: TouchToPlay
+  splashScreenSceneName: SplashScreen
 --- !u!114 &114000013023927550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,6 +296,8 @@ MonoBehaviour:
   named: 
   subStatesList: []
   gameManager: {fileID: 114000012426458244}
+  connectSceneName: Connect
+  timeBetween2Update: 0.5
 --- !u!114 &114000013432092604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,7 +313,7 @@ MonoBehaviour:
   named: 
   subStatesList: []
   gameManager: {fileID: 114000012426458244}
-  splashScreenSceneName: Splashscreen
+  touchPlaySceneName: TouchToPlay
 --- !u!114 &114000013675668842
 MonoBehaviour:
   m_ObjectHideFlags: 1
