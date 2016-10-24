@@ -5,4 +5,10 @@ public class GameManager_Connect : GameManagerState
 {
 
 
+
+    void Update()
+    {
+        gameManager.GetPlayers();
+    }
+
 }

@@ -91,8 +91,8 @@ namespace EquilibreGames
         List<PoolData> poolDatas = new List<PoolData>();
         int cptSceneLoading = 0;
 
-        [SerializeField]
-        string mergedSceneName = "PooledMergedScene";
+       /* [SerializeField]
+        string mergedSceneName = "PooledMergedScene";*/
 
         void Awake()
         {
@@ -324,13 +324,13 @@ namespace EquilibreGames
             mergedScene = SceneManager.CreateScene(mergedSceneName);
             SceneManager.SetActiveScene(mergedScene);*/
 
-            Scene[] scenes = SceneManager.GetAllScenes();
+           /* Scene[] scenes = SceneManager.GetAllScenes();
 
             for (int i = 0; i < scenes.Length; i++)
             {
                 if (scenes[i].name.StartsWith(prefixPooledScene))
                     SceneManager.UnloadScene(scenes[i]);
-            }
+            } */
 
         }
 

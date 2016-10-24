@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour {
 
     [SerializeField]
     new Transform transform;
+
 
     [SerializeField]
     new string name = "";
@@ -13,6 +16,9 @@ public class Player : MonoBehaviour {
     int id = -1;
 
     int teamId = -1;
+
+    [SerializeField]
+    Text nameText;
 
     #region Movement variable
     Vector2 targetPos;
@@ -35,14 +41,15 @@ public class Player : MonoBehaviour {
         teamId = _teamId;
 
         name = _name;
+        nameText.text = _name;
     }
 
 
 
 
-    public void MoveTo(Vector2 position, float deltaTime)
+    public void MoveTo(Vector2 position, float deltaTime, bool directPos = false)
     {
-        if (targetPos != default(Vector2) && !targetPos.Equals(position))
+        if (targetPos != default(Vector2) && !targetPos.Equals(position) && !directPos)
         {
             targetPos = position;
         }

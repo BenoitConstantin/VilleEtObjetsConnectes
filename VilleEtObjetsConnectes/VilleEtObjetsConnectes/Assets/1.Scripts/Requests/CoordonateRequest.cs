@@ -47,7 +47,8 @@ public class CoordonateRequest : MonoBehaviour {
 
        JSONNode JNode =  JSON.Parse(request.text);
 
-       if (JNode["time"].AsInt < lastUpdate)
+        //The response is too old
+        if (JNode["time"].AsInt < lastUpdate)
             yield return null;
 
         lastUpdate = JNode["time"].AsInt;
