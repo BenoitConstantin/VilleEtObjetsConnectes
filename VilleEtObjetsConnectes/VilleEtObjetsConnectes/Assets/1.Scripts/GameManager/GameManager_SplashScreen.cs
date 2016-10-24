@@ -11,6 +11,8 @@ public class GameManager_SplashScreen : GameManagerState
     [SerializeField]
     string touchPlaySceneName = "TouchToPlay";
 
+    [SerializeField]
+    string splashScreenSceneName = "SplashScreen";
 
     float timer = -1;
 
@@ -34,7 +36,13 @@ public class GameManager_SplashScreen : GameManagerState
     {
         yield return new WaitForSeconds(Mathf.Clamp((timeOnSplashScreen - (Time.time - timer)),0, timeOnSplashScreen));
 
-        SceneManager.sceneLoaded -= GoToTouchToPlay;
         this.stateMachine.ChangeState("TouchToPlay");
+    }
+
+    public override void OnDesactivation(string nextState, string info = "")
+    {
+        base.OnDesactivation(nextState, info);
+        SceneManager.UnloadScene(splashScreenSceneName);
+        SceneManager.sceneLoaded -= GoToTouchToPlay;
     }
 }

@@ -4,15 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager_TouchToPlay : GameManagerState
 {
-
     [SerializeField]
-    string splashScreenSceneName = "SplashScreen";
-
+    string touchPlaySceneName = "TouchToPlay";
 
     public override void OnActivation(string previousState, string info = "")
     {
         base.OnActivation(previousState, info);
-        SceneManager.UnloadScene(splashScreenSceneName);
+    }
+
+    public override void OnDesactivation(string nextState, string info = "")
+    {
+        base.OnDesactivation(nextState, info);
+        SceneManager.UnloadScene(touchPlaySceneName);
     }
 
 
