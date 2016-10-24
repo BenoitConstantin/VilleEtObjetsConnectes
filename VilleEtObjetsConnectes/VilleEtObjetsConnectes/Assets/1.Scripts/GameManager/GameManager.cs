@@ -11,7 +11,8 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField]
     StateMachine stateMachine;
 
-    Player[] players = new Player[0];
+    [SerializeField]
+    Player[] players;
 
 
     public Player[] Players

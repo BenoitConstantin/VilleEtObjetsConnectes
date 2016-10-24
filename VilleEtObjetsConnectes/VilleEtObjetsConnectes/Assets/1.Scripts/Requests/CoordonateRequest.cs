@@ -41,7 +41,7 @@ public class CoordonateRequest : MonoBehaviour {
 
     void RequestCoordonates()
     {
-        StartCoroutine(AllocateCoordonates(new WWW(GameManager.Instance.ServerAddress +"/player"), GameManager.Instance.Players));
+        StartCoroutine(AllocateCoordonates(new WWW(GameManager.Instance.ServerAddress +"/player/"), GameManager.Instance.Players));
     }
 
     IEnumerator AllocateCoordonates(WWW request, Player[] players)
@@ -50,6 +50,9 @@ public class CoordonateRequest : MonoBehaviour {
         Debug.Log(request.text);
 
        JSONNode JNode =  JSON.Parse(request.text);
+
+        if (JNode == null)
+            yield return null;
 
         int length = JNode.Count;
 

@@ -51,10 +51,10 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            transform.position = position;
+            transform.position = new Vector3(position.x, transform.position.y, position.y);
         }
 
-        lastPos = position;
+        lastPos = new Vector3(targetPos.x, transform.position.y, targetPos.y);
         targetTime = deltaTime;
     }
 
@@ -63,7 +63,7 @@ public class Player : MonoBehaviour {
     {
         if(lastPos != null)
         {
-            transform.position = Vector3.Lerp(transform.position,targetPos, targetTime * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position,new Vector3(targetPos.x, transform.position.y,targetPos.y), targetTime / Time.deltaTime);
         }
     }
 }
