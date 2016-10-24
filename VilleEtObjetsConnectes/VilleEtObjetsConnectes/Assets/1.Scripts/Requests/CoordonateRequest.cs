@@ -4,16 +4,38 @@ using SimpleJSON;
 
 public class CoordonateRequest : MonoBehaviour {
 
-   /* public class Coordonate ///Il faut que le serveur renvoie une requête JSON avec une liste de coordonnées.
+    /* public class Coordonate ///Il faut que le serveur renvoie une requête JSON avec une liste de coordonnées.
+     {
+         int id;
+         int x;
+         int y;
+     }*/
+
+    [SerializeField]
+    float timeBetween2Update = 0.25f;
+
+    float timer = -1;
+
+    void Start()
     {
-        int id;
-        int x;
-        int y;
-    }*/
+        timer = Time.time + timeBetween2Update;
+        this.enabled = true;
+    }
+
+    void Stop()
+    {
+        timer = -1;
+        this.enabled = false;
+    }
+
 
      void Update()
     {
-        RequestCoordonates();
+        if (Time.time > timer)
+        {
+            RequestCoordonates();
+            timer = Time.time + timeBetween2Update;
+        }
     }
 
 

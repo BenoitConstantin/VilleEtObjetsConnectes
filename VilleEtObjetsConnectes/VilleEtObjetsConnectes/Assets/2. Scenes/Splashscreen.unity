@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf95eb9697de3cd4fa7349eb51284cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddress: 10.1.63.234:5000
+  serverAddress: 10.1.62.79:5000
 --- !u!4 &256016945
 Transform:
   m_ObjectHideFlags: 0
@@ -255,6 +255,7 @@ MonoBehaviour:
   named: 
   subStatesList: []
   gameManager: {fileID: 256016944}
+  splashScreenSceneName: Splashscreen
 --- !u!114 &1477558486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +301,8 @@ MonoBehaviour:
   named: 
   subStatesList: []
   gameManager: {fileID: 256016944}
+  timeOnSplashScreen: 1.5
+  touchPlaySceneName: TouchToPlay
 --- !u!114 &1477558489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627128e2134cbc5418025fd57631c89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetween2Update: 0.25
 --- !u!1 &1581847715
 GameObject:
   m_ObjectHideFlags: 0
