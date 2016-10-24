@@ -6,11 +6,21 @@ public class Player : MonoBehaviour {
     [SerializeField]
     new Transform transform;
 
-    int id = -1;
-    int teamId = -1;
+    [SerializeField]
     new string name = "";
 
+    [SerializeField]
+    int id = -1;
 
+    int teamId = -1;
+
+    #region Movement variable
+
+    Vector3 velocity;
+    Vector2 lastPos;
+    Vector2 targetPos;
+    float targetTime;
+    #endregion
 
     public int Id
     {
@@ -31,8 +41,29 @@ public class Player : MonoBehaviour {
     }
 
 
-    public void MoveTo(Vector2 position)
-    {
 
+
+    public void MoveTo(Vector2 position, float deltaTime)
+    {
+        if (lastPos != null && !lastPos.Equals(position))
+        {
+            targetPos = position;
+        }
+        else
+        {
+            transform.position = position;
+        }
+
+        lastPos = position;
+        targetTime = deltaTime;
+    }
+
+
+    void Update()
+    {
+        if(lastPos != null)
+        {
+            transform.position = Vector3.Lerp(transform.position,targetPos, targetTime * Time.deltaTime);
+        }
     }
 }

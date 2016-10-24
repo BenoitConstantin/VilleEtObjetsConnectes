@@ -48,9 +48,8 @@ public class CoordonateRequest : MonoBehaviour {
     {
         yield return (request);
         Debug.Log(request.text);
-/*
+
        JSONNode JNode =  JSON.Parse(request.text);
-       JNode = JNode["playerCoordinates"];
 
         int length = JNode.Count;
 
@@ -60,10 +59,10 @@ public class CoordonateRequest : MonoBehaviour {
             {
                 if(p.Id == JNode[i]["id"].AsInt)
                 {
-                    p.MoveTo(new Vector2(JNode[i]["x"].AsFloat, JNode[i]["y"].AsFloat));
+                    p.MoveTo(new Vector2(JNode[i]["x"].AsFloat, JNode[i]["y"].AsFloat), timeBetween2Update);
                 }
             }
-        } */
+        } 
     }
 
 }

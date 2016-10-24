@@ -1,0 +1,262 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000013691484640}
+  m_IsPrefabParent: 1
+--- !u!1 &1000012447007312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011912499424}
+  - 114: {fileID: 114000012327739136}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000013691484640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013517618206}
+  - 114: {fileID: 114000012426458244}
+  - 114: {fileID: 114000012380574386}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000014248585832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011935593140}
+  - 114: {fileID: 114000012483660780}
+  - 114: {fileID: 114000012763152432}
+  - 114: {fileID: 114000013023927550}
+  - 114: {fileID: 114000011204214470}
+  - 114: {fileID: 114000013432092604}
+  - 114: {fileID: 114000013675668842}
+  m_Layer: 0
+  m_Name: States
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000011912499424
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012447007312}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013517618206}
+  m_RootOrder: 1
+--- !u!4 &4000011935593140
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013517618206}
+  m_RootOrder: 0
+--- !u!4 &4000013517618206
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013691484640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 4000011935593140}
+  - {fileID: 4000011912499424}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000011204214470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6568af105a2a449b738be4ceefde97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  named: 
+  subStatesList: []
+  gameManager: {fileID: 114000012426458244}
+--- !u!114 &114000012327739136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012447007312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d2fd7dbb7683b41af07be49957c24f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitOnAwake: 1
+  poolObjectList:
+  - kind: FlowerBlue
+    tag: Flower
+    prefab: {fileID: 1000013852073478, guid: e09b99529072a8d43977dde56a110dc1, type: 2}
+    bufferCount: 500
+    maxCount: 800
+    defaultParent: {fileID: 4000011912499424}
+  - kind: FlowerRed
+    tag: Flower
+    prefab: {fileID: 1000010766796620, guid: 9f7156b8dfba2824a9a02e38fad073da, type: 2}
+    bufferCount: 500
+    maxCount: 800
+    defaultParent: {fileID: 4000011912499424}
+  prefixPooledScene: Pooled_
+  poolSceneList: []
+  mergedSceneName: PooledMergedScene
+--- !u!114 &114000012380574386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013691484640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627128e2134cbc5418025fd57631c89a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetween2Update: 0.25
+--- !u!114 &114000012426458244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013691484640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf95eb9697de3cd4fa7349eb51284cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverAddress: 10.1.62.79:5000
+  stateMachine: {fileID: 114000012483660780}
+--- !u!114 &114000012483660780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f70586f1a59ab24b9701198650f7774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useAutomaticNaming: 1
+  stateNameSplit: 5f00
+  statesList:
+  - {fileID: 114000013023927550}
+  - {fileID: 114000011204214470}
+  - {fileID: 114000012763152432}
+  - {fileID: 114000013432092604}
+  - {fileID: 114000013675668842}
+  initialState: {fileID: 114000012763152432}
+  anyState: {fileID: 0}
+  historicLength: 0
+  subStatesAvailablesForAllStates: []
+--- !u!114 &114000012763152432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0e12b1c2dde1043a9d4a25162c431b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  named: 
+  subStatesList: []
+  gameManager: {fileID: 114000012426458244}
+  timeOnSplashScreen: 1.5
+  touchPlaySceneName: TouchToPlay
+--- !u!114 &114000013023927550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8cc623b2afdc146bbd56f1151ebfda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  named: 
+  subStatesList: []
+  gameManager: {fileID: 114000012426458244}
+--- !u!114 &114000013432092604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4d6a7fe4e577943afec1ff3d54350b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  named: 
+  subStatesList: []
+  gameManager: {fileID: 114000012426458244}
+  splashScreenSceneName: Splashscreen
+--- !u!114 &114000013675668842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c263fa8545983a5439bfa3e0f47ad462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  named: 
+  subStatesList: []
+  gameManager: {fileID: 114000012426458244}

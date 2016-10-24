@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EquilibreGames;
 
 public class GameManager : Singleton<GameManager> {
 
@@ -7,7 +8,10 @@ public class GameManager : Singleton<GameManager> {
     string serverAddress;
 
 
-    Player[] players;
+    [SerializeField]
+    StateMachine stateMachine;
+
+    Player[] players = new Player[0];
 
 
     public Player[] Players
@@ -37,5 +41,16 @@ public class GameManager : Singleton<GameManager> {
     void UnLockMatch()
     {
 
+    }
+
+
+    public bool LaunchTutorial()
+    {
+        return ((GameManagerState)(this.stateMachine.CurrentState)).LaunchTutorial();
+    }
+
+    public bool LaunchGame()
+    {
+        return ((GameManagerState)(this.stateMachine.CurrentState)).LaunchGame();
     }
 }
