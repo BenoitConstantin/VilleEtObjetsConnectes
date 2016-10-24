@@ -129,6 +129,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012763152432, guid: 706891d97cd01ec4faa412457865559a,
+        type: 2}
+      propertyPath: timeOnSplashScreen
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 706891d97cd01ec4faa412457865559a, type: 2}
   m_IsPrefabParent: 0
@@ -204,7 +209,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1503377300
 RectTransform:
