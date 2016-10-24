@@ -4,17 +4,12 @@ using SimpleJSON;
 
 public class CoordonateRequest : MonoBehaviour {
 
-    /* public class Coordonate ///Il faut que le serveur renvoie une requête JSON avec une liste de coordonnées.
-     {
-         int id;
-         int x;
-         int y;
-     }*/
 
     [SerializeField]
     float timeBetween2Update = 0.25f;
 
     float timer = -1;
+    int lastUpdate = -1;
 
     void Start()
     {
@@ -49,11 +44,15 @@ public class CoordonateRequest : MonoBehaviour {
         yield return (request);
         Debug.Log(request.text);
 
+
        JSONNode JNode =  JSON.Parse(request.text);
 
-        if (JNode == null)
+       if (JNode["time"].AsInt < lastUpdate)
             yield return null;
 
+        lastUpdate = JNode["time"].AsInt;
+
+        JNode = JNode["players"];
         int length = JNode.Count;
 
         for(int i =0; i < length; i++)

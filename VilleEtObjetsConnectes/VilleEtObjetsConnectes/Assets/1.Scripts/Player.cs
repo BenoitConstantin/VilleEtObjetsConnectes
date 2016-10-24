@@ -15,9 +15,6 @@ public class Player : MonoBehaviour {
     int teamId = -1;
 
     #region Movement variable
-
-    Vector3 velocity;
-    Vector2 lastPos;
     Vector2 targetPos;
     float targetTime;
     #endregion
@@ -45,7 +42,7 @@ public class Player : MonoBehaviour {
 
     public void MoveTo(Vector2 position, float deltaTime)
     {
-        if (lastPos != null && !lastPos.Equals(position))
+        if (targetPos != default(Vector2) && !targetPos.Equals(position))
         {
             targetPos = position;
         }
@@ -54,14 +51,13 @@ public class Player : MonoBehaviour {
             transform.position = new Vector3(position.x, transform.position.y, position.y);
         }
 
-        lastPos = new Vector3(targetPos.x, transform.position.y, targetPos.y);
         targetTime = deltaTime;
     }
 
 
     void Update()
     {
-        if(lastPos != null)
+        if(targetPos != default(Vector2))
         {
             transform.position = Vector3.Lerp(transform.position,new Vector3(targetPos.x, transform.position.y,targetPos.y), targetTime / Time.deltaTime);
         }

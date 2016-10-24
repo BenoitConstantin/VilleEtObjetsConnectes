@@ -32,7 +32,7 @@ public class GameManager_SplashScreen : GameManagerState
 
     IEnumerator GoToTouchToPlayCoroutine()
     {
-        yield return Mathf.Clamp((timeOnSplashScreen - (Time.time - timer)),0, timeOnSplashScreen);
+        yield return new WaitForSeconds(Mathf.Clamp((timeOnSplashScreen - (Time.time - timer)),0, timeOnSplashScreen));
 
         SceneManager.sceneLoaded -= GoToTouchToPlay;
         this.stateMachine.ChangeState("TouchToPlay");
