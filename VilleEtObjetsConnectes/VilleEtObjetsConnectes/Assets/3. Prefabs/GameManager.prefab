@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf95eb9697de3cd4fa7349eb51284cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddress: 10.1.62.79:5000
+  serverAddress: 10.1.62.79
   stateMachine: {fileID: 114000012483660780}
   players: []
   playerPrefab: {fileID: 1000011744817400, guid: 89ce14e37e729944fbbfca13e4990bed,
