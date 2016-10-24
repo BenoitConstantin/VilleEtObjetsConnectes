@@ -11,13 +11,13 @@ public class CoordonateRequest : MonoBehaviour {
     float timer = -1;
     int lastUpdate = -1;
 
-    void Start()
+    public void StartRequest()
     {
         timer = Time.time + timeBetween2Update;
         this.enabled = true;
     }
 
-    void Stop()
+    public void StopRequest()
     {
         timer = -1;
         this.enabled = false;

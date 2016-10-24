@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField]
     GameObject playerPrefab;
 
+    public CoordonateRequest coordonateRequest;
+
     public Player[] Players
     {
         get { return players; }
@@ -33,7 +35,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void GetPlayers()
     {
-        StartCoroutine(GetPlayersCoroutine(new WWW(GameManager.Instance.ServerAddress + "/player/")));
+        StartCoroutine(GetPlayersCoroutine(new WWW(serverAddress + "/player/")));
     }
 
     int lastUpdate = -1;
