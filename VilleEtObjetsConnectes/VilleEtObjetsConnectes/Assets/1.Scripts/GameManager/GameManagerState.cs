@@ -19,4 +19,10 @@ public class GameManagerState : State {
         this.stateMachine.ChangeState("Game");
         return true;
     }
+
+    public virtual bool LaunchConnect()
+    {
+        this.stateMachine.ChangeState("Connect");
+        return true;
+    }
 }

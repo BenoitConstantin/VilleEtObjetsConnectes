@@ -54,4 +54,10 @@ public class GameManager : Singleton<GameManager> {
     {
         return ((GameManagerState)(this.stateMachine.CurrentState)).LaunchGame();
     }
+
+
+    public bool LaunchConnect()
+    {
+        return ((GameManagerState)(this.stateMachine.CurrentState)).LaunchConnect();
+    }
 }
