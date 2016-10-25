@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: TeamScriptableObject
   m_EditorClassIdentifier: 
   teamInfos:
-  - color: {r: 0.07586192, g: 0, b: 1, a: 0}
+  - color: {fileID: 2100000, guid: 7463b669bc205f64c9d64b46e9668213, type: 2}
     flower: FlowerBlue
-  - color: {r: 0.9044118, g: 0, b: 0, a: 0}
+  - color: {fileID: 2100000, guid: a9d213101fe0598409110050cb5ac96f, type: 2}
     flower: FlowerRed

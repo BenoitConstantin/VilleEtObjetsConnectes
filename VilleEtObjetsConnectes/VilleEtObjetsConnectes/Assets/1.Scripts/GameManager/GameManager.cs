@@ -72,6 +72,7 @@ public class GameManager : Singleton<GameManager> {
                 players[i] = ObjectPool.Instance.GetFromPool("Player").GetComponent<Player>();
 
              players[i].Init(JNode["id"].AsInt, JNode["team"].AsInt, JNode["name"]);
+            players[i].gameObject.SetActive(false);
         }
     }
 
