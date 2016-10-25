@@ -17,6 +17,8 @@ public class GameManager_Game : GameManagerState
         {
             players[i].MoveTo(initialGamePosition, 0, true);
         }
+
+        gameManager.coordonateRequest.StartRequest();
     }
 
 

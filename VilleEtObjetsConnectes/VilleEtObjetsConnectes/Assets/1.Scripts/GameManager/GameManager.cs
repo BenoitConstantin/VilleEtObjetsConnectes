@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField]
     GameObject playerPrefab;
 
+    public CoordonateRequest coordonateRequest;
+
     public Player[] Players
     {
         get { return players; }
@@ -33,7 +35,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void GetPlayers()
     {
-        StartCoroutine(GetPlayersCoroutine(new WWW(GameManager.Instance.ServerAddress + "/player/")));
+        StartCoroutine(GetPlayersCoroutine(new WWW(serverAddress + "/player/")));
     }
 
     int lastUpdate = -1;
@@ -41,7 +43,7 @@ public class GameManager : Singleton<GameManager> {
     {
         yield return request;
 
-        Debug.Log(request);
+        Debug.Log(request.text);
 
         JSONNode JNode = JSON.Parse(request.text);
 
@@ -58,7 +60,7 @@ public class GameManager : Singleton<GameManager> {
         {
             //Clear all players
             for (int i = 0; i < players.Length; i++)
-                Destroy(players[i]);
+                ObjectPool.Instance.Pool(players[i].gameObject);
 
             players = new Player[length];
         }
@@ -67,9 +69,7 @@ public class GameManager : Singleton<GameManager> {
         {
             //Instantiate new players
             if (players[i] == null)
-                players[i] = Instantiate(playerPrefab).GetComponent<Player>();
-
-             players[i].gameObject.SetActive(false);
+                players[i] = ObjectPool.Instance.GetFromPool("Player").GetComponent<Player>();
 
              players[i].Init(JNode["id"].AsInt, JNode["team"].AsInt, JNode["name"]);
         }

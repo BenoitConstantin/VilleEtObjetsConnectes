@@ -8,16 +8,19 @@ public class CoordonateRequest : MonoBehaviour {
     [SerializeField]
     float timeBetween2Update = 0.25f;
 
+    [SerializeField]
+    float mapScale = 0.01f;
+
     float timer = -1;
     int lastUpdate = -1;
 
-    void Start()
+    public void StartRequest()
     {
         timer = Time.time + timeBetween2Update;
         this.enabled = true;
     }
 
-    void Stop()
+    public void StopRequest()
     {
         timer = -1;
         this.enabled = false;
@@ -64,7 +67,7 @@ public class CoordonateRequest : MonoBehaviour {
             {
                 if(p.Id == JNode[i]["id"].AsInt)
                 {
-                    p.MoveTo(new Vector2(JNode[i]["x"].AsFloat, JNode[i]["y"].AsFloat), deltaTime / 1000f);
+                    p.MoveTo(new Vector2(mapScale*JNode[i]["x"].AsFloat, mapScale * JNode[i]["y"].AsFloat), deltaTime / 1000f);
                 }
             }
         } 
