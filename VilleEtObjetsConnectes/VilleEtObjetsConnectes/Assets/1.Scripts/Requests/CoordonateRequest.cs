@@ -39,12 +39,12 @@ public class CoordonateRequest : MonoBehaviour {
 
     void RequestCoordonates()
     {
-        StartCoroutine(AllocateCoordonates(new WWW(GameManager.Instance.ServerAddress +"/player/"), GameManager.Instance.Players));
+        StartCoroutine(AllocateCoordonates(new WWWS(GameManager.Instance.ServerAddress +"/player/"), GameManager.Instance.Players));
     }
 
-    IEnumerator AllocateCoordonates(WWW request, Player[] players)
+    IEnumerator AllocateCoordonates(WWWS request, Player[] players)
     {
-        yield return (request);
+        yield return (request.next());
         Debug.Log(request.text);
 
 

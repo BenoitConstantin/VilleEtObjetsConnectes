@@ -35,13 +35,13 @@ public class GameManager : Singleton<GameManager> {
 
     public void GetPlayers()
     {
-        StartCoroutine(GetPlayersCoroutine(new WWW(serverAddress + "/player/")));
+        StartCoroutine(GetPlayersCoroutine(new WWWS(serverAddress + "/player/")));
     }
 
     int lastUpdate = -1;
-    IEnumerator GetPlayersCoroutine(WWW request)
+    IEnumerator GetPlayersCoroutine(WWWS request)
     {
-        yield return request;
+        yield return request.next();
 
         Debug.Log(request.text);
 
