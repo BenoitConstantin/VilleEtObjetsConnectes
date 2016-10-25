@@ -10,7 +10,7 @@ public class TeamScriptableObject : ScriptableObject {
     [System.Serializable]
     public class TeamInfo
     {
-        public Color color;
+        public Material color;
         public string flower;
     }
 

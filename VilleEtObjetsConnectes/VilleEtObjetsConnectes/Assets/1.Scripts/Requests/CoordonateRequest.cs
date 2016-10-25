@@ -46,7 +46,7 @@ public class CoordonateRequest : MonoBehaviour {
     {
         yield return (request);
         Debug.Log(request.text);
-
+        Debug.Log(request.error);
 
        JSONNode JNode =  JSON.Parse(request.text);
 

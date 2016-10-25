@@ -8,7 +8,6 @@ public class Player : MonoBehaviour {
     [SerializeField]
     new Transform transform;
 
-
     [SerializeField]
     new string name = "";
 
@@ -20,6 +19,15 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     Text nameText;
+
+    [SerializeField]
+    MeshRenderer meshRenderer;
+
+    [SerializeField]
+    TeamScriptableObject teamScriptableObject;
+
+    [SerializeField]
+    Material greyMaterial;
 
     #region Movement variable
     Vector2 targetPos;
@@ -70,5 +78,13 @@ public class Player : MonoBehaviour {
         {
             transform.position = Vector3.Lerp(transform.position,new Vector3(targetPos.x, transform.position.y,targetPos.y), 1f/targetTime *Time.deltaTime);
         }
+    }
+
+    public void ValidPosition(bool isValid)
+    {
+        if (!isValid)
+            meshRenderer.material = greyMaterial;
+        else
+            meshRenderer.material = teamScriptableObject.teamInfos[teamId-1].color;
     }
 }
