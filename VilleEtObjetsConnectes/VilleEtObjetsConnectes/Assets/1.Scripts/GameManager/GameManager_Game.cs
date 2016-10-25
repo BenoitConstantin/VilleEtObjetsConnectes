@@ -24,6 +24,7 @@ public class GameManager_Game : GameManagerState
             players[i].gameObject.SetActive(true);
         }
 
+        gameManager.LockMatch();
         gameManager.coordonateRequest.StartRequest();     
     }
 
@@ -45,4 +46,7 @@ public class GameManager_Game : GameManagerState
     {
         return false;
     }
+
+
+
 }
