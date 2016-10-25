@@ -12,7 +12,7 @@ public class CoordonateRequest : MonoBehaviour {
     float mapScale = 0.01f;
 
     float timer = -1;
-    int lastUpdate = -1;
+    long lastUpdate = -1;
 
     public void StartRequest()
     {
@@ -50,13 +50,15 @@ public class CoordonateRequest : MonoBehaviour {
 
        JSONNode JNode =  JSON.Parse(request.text);
 
+        long time = long.Parse(JNode["time"]);
+
         //The response is too old
-        if (JNode["time"].AsInt < lastUpdate)
+        if (time < lastUpdate)
             yield return null;
 
-        float deltaTime = JNode["time"].AsInt - lastUpdate;
+        float deltaTime = time - lastUpdate;
 
-        lastUpdate = JNode["time"].AsInt;
+        lastUpdate = time;
 
         JNode = JNode["players"];
         int length = JNode.Count;
@@ -67,7 +69,7 @@ public class CoordonateRequest : MonoBehaviour {
             {
                 if(p.Id == JNode[i]["id"].AsInt)
                 {
-                    p.MoveTo(new Vector2(mapScale*JNode[i]["x"].AsFloat, mapScale * JNode[i]["y"].AsFloat), deltaTime / 1000f);
+                    p.MoveTo(new Vector2(mapScale*JNode[i]["x"].AsFloat, mapScale * JNode[i]["y"].AsFloat), deltaTime/1000);
                 }
             }
         } 

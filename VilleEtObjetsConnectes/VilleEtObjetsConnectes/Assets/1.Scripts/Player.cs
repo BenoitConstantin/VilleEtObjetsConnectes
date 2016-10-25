@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     [SerializeField]
     int id = -1;
 
+    [SerializeField]
     int teamId = -1;
 
     [SerializeField]
@@ -64,9 +65,10 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
+        //Debug.Log(targetTime);
         if(targetPos != default(Vector2))
         {
-            transform.position = Vector3.Lerp(transform.position,new Vector3(targetPos.x, transform.position.y,targetPos.y), targetTime / Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position,new Vector3(targetPos.x, transform.position.y,targetPos.y), 1f/targetTime *Time.deltaTime);
         }
     }
 }
