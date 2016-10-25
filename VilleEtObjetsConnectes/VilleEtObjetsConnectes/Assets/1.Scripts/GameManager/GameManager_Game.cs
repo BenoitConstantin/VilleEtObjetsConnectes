@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager_Game : GameManagerState
 {
@@ -7,10 +8,14 @@ public class GameManager_Game : GameManagerState
     [SerializeField]
     Vector2 initialGamePosition = Vector2.zero;
 
+    [SerializeField]
+    string gameSceneName = "Game";
+
+
     public override void OnActivation(string previousState, string info = "")
     {
         base.OnActivation(previousState, info);
-
+        SceneManager.LoadScene(gameSceneName);
         Player[] players = GameManager.Instance.Players;
 
         for (int i =0; i < players.Length; i++)
@@ -18,7 +23,7 @@ public class GameManager_Game : GameManagerState
             players[i].MoveTo(initialGamePosition, 0, true);
         }
 
-        gameManager.coordonateRequest.StartRequest();
+        gameManager.coordonateRequest.StartRequest();     
     }
 
 
