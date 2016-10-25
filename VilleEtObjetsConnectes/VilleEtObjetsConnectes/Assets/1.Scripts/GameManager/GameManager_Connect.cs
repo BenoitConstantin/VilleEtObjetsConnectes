@@ -18,6 +18,8 @@ public class GameManager_Connect : GameManagerState
         base.OnActivation(previousState, info);
 
         SceneManager.LoadScene(connectSceneName);
+        gameManager.UnLockMatch();
+
     }
 
     void Update()
@@ -28,5 +30,6 @@ public class GameManager_Connect : GameManagerState
             timer = Time.time + timeBetween2Update;
         }
     }
+
 
 }

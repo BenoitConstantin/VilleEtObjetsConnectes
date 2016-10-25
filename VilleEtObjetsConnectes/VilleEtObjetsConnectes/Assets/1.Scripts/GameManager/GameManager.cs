@@ -76,14 +76,38 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    void LockMatch()
+
+    public void UnLockMatch()
     {
+        StartCoroutine(UnLockMatchCoroutine());
+    }
+
+    public void LockMatch()
+    {
+        StartCoroutine(LockMatchCoroutine());
+    }
+
+    IEnumerator UnLockMatchCoroutine()
+    {
+        WWWS request = new WWWS(GameManager.Instance.serverAddress + "/reset/", "POST");
+        yield return request.next();
+
+        if(string.IsNullOrEmpty(request.error))
+        {
+            StartCoroutine(UnLockMatchCoroutine());
+        }
 
     }
 
-    void UnLockMatch()
+    IEnumerator LockMatchCoroutine()
     {
+        WWWS request = new WWWS(serverAddress + "/start/", "POST");
+        yield return request.next();
 
+        if (string.IsNullOrEmpty(request.error))
+        {
+            StartCoroutine(LockMatchCoroutine());
+        }
     }
 
 
