@@ -28,6 +28,7 @@ public class WWWS /*: IEnumerable*/ {
         try {
             request = (HttpWebRequest) WebRequest.Create(url);
             request.Method = method;
+            request.AllowAutoRedirect = true;
             if (request.Method == "POST")
             {
                 request.ContentType = "application/x-www-form-urlencoded";
@@ -50,9 +51,21 @@ public class WWWS /*: IEnumerable*/ {
             HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(result);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                Debug.Log(response.ContentType);
                 Stream dataStream = response.GetResponseStream();
                 StreamReader reader = new StreamReader(dataStream);
                 text = reader.ReadToEnd();
+            }
+            else if (
+                response.StatusCode == System.Net.HttpStatusCode.Forbidden ||
+                response.StatusCode == System.Net.HttpStatusCode.BadGateway ||
+                response.StatusCode == System.Net.HttpStatusCode.BadRequest ||
+                response.StatusCode == System.Net.HttpStatusCode.InternalServerError ||
+                response.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed ||
+                response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                error = "Resource unavailable. Code=" + response.StatusCode;
+                Debug.Log(error);
             }
             else
             {
