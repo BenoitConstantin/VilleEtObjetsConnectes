@@ -41,7 +41,17 @@ public class MapManager : MonoBehaviour {
     {
         foreach(Player p in GameManager.Instance.Players)
         {
-            Conquere(new Vector2(p.transform.position.x, p.transform.position.z), p.TeamId);
+            Vector3 position = p.transform.position;
+
+            if (!Physics.Raycast(position, Vector3.down, Mathf.Infinity))
+            {
+                p.ValidPosition(false);
+            }
+            else
+            {
+                p.ValidPosition(true);
+                Conquere(new Vector2(position.x, position.z), p.TeamId);
+            }
         }
     }
 
@@ -51,7 +61,7 @@ public class MapManager : MonoBehaviour {
         float caseWidth = mapWidth / gridWidth;
         float caseHeight = mapHeight / gridLength;
 
-        int index = ((int)(position.y/(caseHeight)) * gridWidth) + ((int)(position.x/(caseWidth))) + ((int)(gridLength*gridWidth/2f));
+        int index = ((int)(position.y/(caseHeight)) * gridWidth) + ((int)(position.x/(caseWidth))) + ((int)(gridLength*gridWidth/2f)) ;
 
         bitMap[index] = teamId;
 
@@ -60,7 +70,7 @@ public class MapManager : MonoBehaviour {
             ObjectPool.Instance.Pool(flowers[index]);
         }
         GameObject flower = ObjectPool.Instance.GetFromPool(teamScriptableObject.teamInfos[teamId - 1].flower);
-        flower.transform.position = new Vector3((position.x * (caseWidth/2f)) /*- (caseWidth) /2f*/ , 0, (position.y * (caseHeight/2f)) /*- (caseHeight) / 2f*/);
+        flower.transform.position = new Vector3( ((int) (position.x/caseWidth)) * (caseWidth) , 0,  ((int) (position.y / caseHeight)) * (caseHeight));
         flowers[index] = flower;
 
     }

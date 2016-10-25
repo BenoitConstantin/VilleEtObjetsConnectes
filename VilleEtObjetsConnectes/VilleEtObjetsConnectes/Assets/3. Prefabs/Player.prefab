@@ -143,7 +143,12 @@ MonoBehaviour:
   transform: {fileID: 4000010862530482}
   name: 
   id: 1
+  teamId: 1
   nameText: {fileID: 114000014262984976}
+  meshRenderer: {fileID: 23000011670300368}
+  teamScriptableObject: {fileID: 11400000, guid: a1d4fc74c20d3c3409be3553bd3c5443,
+    type: 2}
+  greyMaterial: {fileID: 2100000, guid: 6e315fef68a26ec48b22eaa6a75a0eca, type: 2}
 --- !u!114 &114000011920914756
 MonoBehaviour:
   m_ObjectHideFlags: 1
