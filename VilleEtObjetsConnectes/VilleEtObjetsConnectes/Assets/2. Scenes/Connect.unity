@@ -891,6 +891,7 @@ GameObject:
   - 114: {fileID: 933318183}
   - 114: {fileID: 933318182}
   - 114: {fileID: 933318186}
+  - 114: {fileID: 933318187}
   m_Layer: 5
   m_Name: ScreenConnect
   m_TagString: Untagged
@@ -993,6 +994,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb26d9589ac2424d85e980be953b481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &933318187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 933318181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8f6ed319fe03442b515943825ff61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipeRose:
+  - {fileID: 1674803563}
+  - {fileID: 1050649710}
+  - {fileID: 1175215157}
+  - {fileID: 1758234524}
+  equipeNoire:
+  - {fileID: 1008528279}
+  - {fileID: 828604835}
+  - {fileID: 1927894735}
+  - {fileID: 1024048011}
 --- !u!1 &1008528277
 GameObject:
   m_ObjectHideFlags: 0
