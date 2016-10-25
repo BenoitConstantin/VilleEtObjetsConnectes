@@ -7,12 +7,15 @@ using System.Security.Cryptography.X509Certificates;
 
 public class WWWS /*: IEnumerable*/ {
     HttpWebRequest request;
-    public string text;
-    string url;
-    public bool isDone {get; private set;}
+    public string text { get; private set; }
+    public string method { get; private set; }
+    public string url { get; private set; }
+    public string error { get; private set; }
+    public bool isDone { get; private set; }
     
-    public WWWS(string url) {
+    public WWWS(string url, string method="GET") {
         this.url = url;
+        this.method = method;
         isDone = false;
     }
 
@@ -22,20 +25,44 @@ public class WWWS /*: IEnumerable*/ {
         isDone = false;
         ServicePointManager.ServerCertificateValidationCallback = TrustCertificate;
         
-        request = (HttpWebRequest) WebRequest.Create(url);
-        // HttpWebResponse response = (HttpWebResponse) request.GetResponse();
-        request.BeginGetResponse(new System.AsyncCallback(FinishWebRequest), null);
+        try {
+            request = (HttpWebRequest) WebRequest.Create(url);
+            request.Method = method;
+            if (request.Method == "POST")
+            {
+                request.ContentType = "application/x-www-form-urlencoded";
+            }
+            // HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+            request.BeginGetResponse(new System.AsyncCallback(FinishWebRequest), null);
+            error = null;
+        }
+        catch (WebException webExcp)
+        {
+            error = webExcp.ToString();
+        }
         
         while (!isDone)
             yield return null;
     }
     void FinishWebRequest(System.IAsyncResult result)
     {
-        WebResponse response = request.EndGetResponse(result);
-        
-        Stream dataStream = response.GetResponseStream();
-        StreamReader reader = new StreamReader(dataStream);
-        text = reader.ReadToEnd();
+        try {
+            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(result);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                Stream dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                text = reader.ReadToEnd();
+            }
+            else
+            {
+                // FIXME
+            }
+        }
+        catch (WebException webExcp)
+        {
+            error = webExcp.ToString();
+        }
         
         isDone = true;
     }
