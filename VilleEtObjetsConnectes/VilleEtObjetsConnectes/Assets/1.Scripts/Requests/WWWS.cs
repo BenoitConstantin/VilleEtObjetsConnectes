@@ -14,6 +14,8 @@ public class WWWS /*: IEnumerable*/ {
     public bool isDone { get; private set; }
     public string[][] formdata { get; private set; }
     
+    private byte[] postBytes;
+    
     public WWWS(string url, string method="GET", string[][] formdata=null) {
         this.url = url;
         this.method = method;
@@ -27,10 +29,12 @@ public class WWWS /*: IEnumerable*/ {
         isDone = false;
         ServicePointManager.ServerCertificateValidationCallback = TrustCertificate;
         
+        error = null;
         try {
             request = (HttpWebRequest) WebRequest.Create(url);
             request.Method = method;
             request.AllowAutoRedirect = true;
+            bool letStreamRequestStartResponseThread = false;
             if (request.Method == "POST")
             {
                 request.ContentType = "application/x-www-form-urlencoded";
@@ -42,17 +46,17 @@ public class WWWS /*: IEnumerable*/ {
                         outgoingQueryString.Add(keyval[0], keyval[1]);
                     string postData = outgoingQueryString.ToString();
                     System.Text.ASCIIEncoding ascii = new System.Text.ASCIIEncoding();
-                    byte[] postBytes = ascii.GetBytes(postData.ToString());
+                    postBytes = ascii.GetBytes(postData.ToString());
                     request.ContentLength = postBytes.Length;
-                    Stream postStream = request.GetRequestStream();
-                    postStream.Write(postBytes, 0, postBytes.Length);
-                    postStream.Flush();
-                    postStream.Close();
+                    letStreamRequestStartResponseThread = true; // on laisse GetRequestStreamCallback faire l'appel à BeginGetResponse
+                    request.BeginGetRequestStream(new System.AsyncCallback(GetRequestStreamCallback), request);
                 }
             }
-            // HttpWebResponse response = (HttpWebResponse) request.GetResponse();
-            request.BeginGetResponse(new System.AsyncCallback(FinishWebRequest), null);
-            error = null;
+            if (!letStreamRequestStartResponseThread)
+            {
+                // HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+                request.BeginGetResponse(new System.AsyncCallback(FinishWebRequest), null);
+            }
         }
         catch (WebException webExcp)
         {
@@ -61,6 +65,20 @@ public class WWWS /*: IEnumerable*/ {
         
         while (!isDone)
             yield return null;
+    }
+    void GetRequestStreamCallback(System.IAsyncResult asynchronousResult)
+    {
+        HttpWebRequest request = (HttpWebRequest)asynchronousResult.AsyncState;
+        
+        // End the operation
+        Stream postStream = request.EndGetRequestStream(asynchronousResult);
+        
+        postStream.Write(postBytes, 0, postBytes.Length);
+        postStream.Flush();
+        postStream.Close();
+        
+        // Start the asynchronous operation to get the response
+        request.BeginGetResponse(new System.AsyncCallback(FinishWebRequest), request);
     }
     void FinishWebRequest(System.IAsyncResult result)
     {
