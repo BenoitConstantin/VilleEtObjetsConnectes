@@ -24,8 +24,8 @@ public class GameManager_Game : GameManagerState
             players[i].gameObject.SetActive(true);
         }
 
-        gameManager.LockMatch();
-        gameManager.coordonateRequest.StartRequest();     
+       gameManager.LockMatch();
+       gameManager.coordonateRequest.StartRequest();    
     }
 
 
