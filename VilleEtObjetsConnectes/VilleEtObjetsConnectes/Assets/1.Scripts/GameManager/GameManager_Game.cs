@@ -29,6 +29,24 @@ public class GameManager_Game : GameManagerState
     }
 
 
+    void Update()
+    {
+        foreach (Player p in players)
+        {
+            Vector3 position = p.transform.position;
+
+            if (!Physics.Raycast(position, Vector3.down, Mathf.Infinity))
+            {
+                p.ValidPosition(false);
+            }
+            else
+            {
+                p.ValidPosition(true);
+                MapManager.Instance.Conquere(new Vector2(position.x, position.z), p.TeamId);
+            }
+        }
+    }
+
     /// <summary>
     /// Can't launch Tutorial in game state
     /// </summary>
