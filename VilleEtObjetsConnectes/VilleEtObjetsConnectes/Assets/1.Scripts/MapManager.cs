@@ -2,7 +2,7 @@
 using System.Collections;
 using EquilibreGames;
 using SimpleJSON;
-
+using Newtonsoft;
 
 public class MapManager : Singleton<MapManager> {
 
@@ -92,7 +92,9 @@ public class MapManager : Singleton<MapManager> {
     IEnumerator SendBitMapCoroutine()
     {
         string[][] formData = new string[1][];
-        formData[0] = new string[] { "map", JsonUtility.ToJson(new SerializedBitMap(bitMap))};
+
+
+        formData[0] = new string[] { "map", Newtonsoft.Json.JsonConvert.SerializeObject(bitMap)};
         Debug.Log(formData[0][1]);
 
         WWWS request = new WWWS(GameManager.Instance.ServerAddress + "/map/", "POST", formData);
