@@ -36,10 +36,10 @@ public class PlayerDistrib : MonoBehaviour {
         for (int i = 0; i <GameManager.Instance.Players.Length; i++)
         {
             if (GameManager.Instance.Players[i].TeamId == 0)
-                equipeRose[cpt1].text = GameManager.Instance.Players[i].name;
+                equipeRose[cpt1].text = GameManager.Instance.Players[i].PlayerName;
                 cpt1++;
             if (GameManager.Instance.Players[i].TeamId == 1)
-                equipeNoire[cpt2].text = GameManager.Instance.Players[i].name;
+                equipeNoire[cpt2].text = GameManager.Instance.Players[i].PlayerName;
                 cpt2++;
         }
     }
