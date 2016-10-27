@@ -95,7 +95,6 @@ public class MapManager : Singleton<MapManager> {
 
 
         formData[0] = new string[] { "map", Newtonsoft.Json.JsonConvert.SerializeObject(bitMap)};
-        Debug.Log(formData[0][1]);
 
         WWWS request = new WWWS(GameManager.Instance.ServerAddress + "/map/", "POST", formData);
         yield return request.next();
