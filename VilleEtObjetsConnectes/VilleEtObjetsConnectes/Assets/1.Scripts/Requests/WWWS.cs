@@ -12,10 +12,12 @@ public class WWWS /*: IEnumerable*/ {
     public string url { get; private set; }
     public string error { get; private set; }
     public bool isDone { get; private set; }
+    public string[][] formdata { get; private set; }
     
-    public WWWS(string url, string method="GET") {
+    public WWWS(string url, string method="GET", string[][] formdata=null) {
         this.url = url;
         this.method = method;
+        this.formdata = formdata;
         isDone = false;
     }
 
@@ -32,6 +34,21 @@ public class WWWS /*: IEnumerable*/ {
             if (request.Method == "POST")
             {
                 request.ContentType = "application/x-www-form-urlencoded";
+                request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
+                if (formdata != null)
+                {
+                    System.Collections.Specialized.NameValueCollection outgoingQueryString = new System.Collections.Specialized.NameValueCollection{};
+                    foreach (string[] keyval in formdata)
+                        outgoingQueryString.Add(keyval[0], keyval[1]);
+                    string postData = outgoingQueryString.ToString();
+                    System.Text.ASCIIEncoding ascii = new System.Text.ASCIIEncoding();
+                    byte[] postBytes = ascii.GetBytes(postData.ToString());
+                    request.ContentLength = postBytes.Length;
+                    Stream postStream = request.GetRequestStream();
+                    postStream.Write(postBytes, 0, postBytes.Length);
+                    postStream.Flush();
+                    postStream.Close();
+                }
             }
             // HttpWebResponse response = (HttpWebResponse) request.GetResponse();
             request.BeginGetResponse(new System.AsyncCallback(FinishWebRequest), null);
