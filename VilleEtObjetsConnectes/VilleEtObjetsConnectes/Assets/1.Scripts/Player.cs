@@ -85,6 +85,6 @@ public class Player : MonoBehaviour {
         if (!isValid)
             meshRenderer.material = greyMaterial;
         else
-            meshRenderer.material = teamScriptableObject.teamInfos[teamId-1].color;
+            meshRenderer.material = teamScriptableObject.teamInfos[teamId].color;
     }
 }

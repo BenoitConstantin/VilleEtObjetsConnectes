@@ -25,6 +25,13 @@ public class GameManager : Singleton<GameManager> {
         get { return players; }
     }
 
+    LocationService lService;
+
+    void Start()
+    {
+        lService = new LocationService();
+        lService.Start(0.1f);
+    }
 
 
     public string ServerAddress
@@ -71,7 +78,7 @@ public class GameManager : Singleton<GameManager> {
             if (players[i] == null)
                 players[i] = ObjectPool.Instance.GetFromPool("Player").GetComponent<Player>();
 
-             players[i].Init(JNode["id"].AsInt, JNode["team"].AsInt, JNode["name"]);
+             players[i].Init(JNode["id"].AsInt, JNode["team"].AsInt, JNode["name"].Value);
             players[i].gameObject.SetActive(false);
         }
     }
@@ -92,7 +99,8 @@ public class GameManager : Singleton<GameManager> {
         WWWS request = new WWWS(GameManager.Instance.serverAddress + "/reset/", "POST");
         yield return request.next();
 
-        if(string.IsNullOrEmpty(request.error))
+        Debug.Log(request.error);
+        if(!string.IsNullOrEmpty(request.error) && !request.error.Equals("Null"))
         {
             StartCoroutine(UnLockMatchCoroutine());
         }
@@ -104,7 +112,7 @@ public class GameManager : Singleton<GameManager> {
         WWWS request = new WWWS(serverAddress + "/start/", "POST");
         yield return request.next();
 
-        if (string.IsNullOrEmpty(request.error))
+        if (!string.IsNullOrEmpty(request.error)  && !request.error.Equals("Null"))
         {
             StartCoroutine(LockMatchCoroutine());
         }
@@ -125,5 +133,15 @@ public class GameManager : Singleton<GameManager> {
     public bool LaunchConnect()
     {
         return ((GameManagerState)(this.stateMachine.CurrentState)).LaunchConnect();
+    }
+
+    public Vector2 GPSLocation()
+    {
+        return new Vector2(lService.lastData.longitude, lService.lastData.latitude);
+    }
+
+    void OnDestroy()
+    {
+        lService.Stop();
     }
 }
