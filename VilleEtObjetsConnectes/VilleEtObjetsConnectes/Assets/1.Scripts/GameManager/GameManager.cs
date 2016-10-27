@@ -25,14 +25,45 @@ public class GameManager : Singleton<GameManager> {
         get { return players; }
     }
 
-    LocationService lService;
 
-    void Awake()
+        IEnumerator Start()
     {
-        lService = new LocationService();
-        lService.Start(0.1f);
-        Debug.Log("LocationService : " + lService.isEnabledByUser);
-    }
+        Debug.Log("LocationService : " + Input.location.isEnabledByUser);
+
+        // First, check if user has location service enabled
+        if (!Input.location.isEnabledByUser)
+                yield break;
+
+            // Start service before querying location
+            Input.location.Start();
+
+            // Wait until service initializes
+            int maxWait = 20;
+            while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+            {
+                yield return new WaitForSeconds(1);
+                maxWait--;
+            }
+
+            // Service didn't initialize in 20 seconds
+            if (maxWait < 1)
+            {
+                print("Timed out");
+                yield break;
+            }
+
+            // Connection has failed
+            if (Input.location.status == LocationServiceStatus.Failed)
+            {
+                print("Unable to determine device location");
+                yield break;
+            }
+            else
+            {
+                // Access granted and location value could be retrieved
+                print("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
+            }
+        }
 
 
     public string ServerAddress
@@ -114,9 +145,11 @@ public class GameManager : Singleton<GameManager> {
 
     IEnumerator LockMatchCoroutine()
     {
-        //string[][] formData = new string[2][];
-
         WWWForm formData = new WWWForm();
+
+        while (Input.location.status == LocationServiceStatus.Initializing)
+            yield return null;
+
         Vector2 gpsLocation = GPSLocation();
 
         formData.AddField("x", gpsLocation.x.ToString());
@@ -150,12 +183,12 @@ public class GameManager : Singleton<GameManager> {
 
     public Vector2 GPSLocation()
     {
-        Debug.Log("Location service : " + lService.status);
-        return new Vector2(lService.lastData.longitude, lService.lastData.latitude);
+        Debug.Log("Location service : " + Input.location.status);
+        return new Vector2(Input.location.lastData.longitude, Input.location.lastData.latitude);
     }
 
     void OnDestroy()
     {
-        lService.Stop();
+        Input.location.Stop();
     }
 }
