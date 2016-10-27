@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EquilibreGames;
+using SimpleJSON;
+
 
 public class MapManager : Singleton<MapManager> {
-
-
 
 
     // 0 aucune équipe n'a la case
@@ -27,15 +27,30 @@ public class MapManager : Singleton<MapManager> {
     [SerializeField]
     TeamScriptableObject teamScriptableObject;
 
+    [SerializeField]
+    float sendingTime = 0.25f;
+
     int[] bitMap;
     GameObject[] flowers;
 
-
+    float timer = -1;
+    bool lastSendingIsReturned = true;
 
     void Awake()
     {
         bitMap = new int[gridWidth * gridLength];
         flowers = new GameObject[gridWidth * gridLength];
+    }
+
+
+    void Update()
+    {
+        if (Time.time > timer && lastSendingIsReturned)
+        {
+            SendBitMap();
+            timer = Time.time + sendingTime;
+            lastSendingIsReturned = false;
+        }
     }
 
 
@@ -55,7 +70,35 @@ public class MapManager : Singleton<MapManager> {
         GameObject flower = ObjectPool.Instance.GetFromPool(teamScriptableObject.teamInfos[teamId - 1].flower);
         flower.transform.position = new Vector3( ((int) (position.x/caseWidth)) * (caseWidth) , 0,  ((int) (position.y / caseHeight)) * (caseHeight));
         flowers[index] = flower;
+    }
 
+
+    void SendBitMap()
+    {
+        StartCoroutine(SendBitMapCoroutine());
+    }
+
+    [System.Serializable]
+    public class SerializedBitMap
+    {
+        public int[] bitMap;
+
+        public SerializedBitMap(int[] _bitMap)
+        {
+            bitMap = _bitMap;
+        }
+    }
+
+    IEnumerator SendBitMapCoroutine()
+    {
+        string[][] formData = new string[1][];
+        formData[0] = new string[] { "map", JsonUtility.ToJson(new SerializedBitMap(bitMap))};
+        Debug.Log(formData[0][1]);
+
+        WWWS request = new WWWS(GameManager.Instance.ServerAddress + "/map/", "POST", formData);
+        yield return request.next();
+
+        lastSendingIsReturned = true;
     }
 
 
