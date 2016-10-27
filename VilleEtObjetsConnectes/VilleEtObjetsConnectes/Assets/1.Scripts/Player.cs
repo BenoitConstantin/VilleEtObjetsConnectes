@@ -27,7 +27,7 @@ public class Player : MonoBehaviour {
     Text nameText;
 
     [SerializeField]
-    MeshRenderer meshRenderer;
+    MeshRenderer[] meshRenderers;
 
     [SerializeField]
     TeamScriptableObject teamScriptableObject;
@@ -89,8 +89,14 @@ public class Player : MonoBehaviour {
     public void ValidPosition(bool isValid)
     {
         if (!isValid)
-            meshRenderer.material = greyMaterial;
+        {
+            foreach(MeshRenderer meshRenderer in meshRenderers)
+                 meshRenderer.material = greyMaterial;
+        }
         else
-            meshRenderer.material = teamScriptableObject.teamInfos[teamId].material;
+        {
+            foreach (MeshRenderer meshRenderer in meshRenderers)
+                meshRenderer.material = teamScriptableObject.teamInfos[teamId].material;
+        }
     }
 }
