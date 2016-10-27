@@ -37,8 +37,10 @@ public class PlayerDistrib : MonoBehaviour {
         {
             if (GameManager.Instance.Players[i].TeamId == 0)
                 equipeRose[cpt1].text = GameManager.Instance.Players[i].name;
+                cpt1++;
             if (GameManager.Instance.Players[i].TeamId == 1)
                 equipeNoire[cpt2].text = GameManager.Instance.Players[i].name;
+                cpt2++;
         }
     }
 }
