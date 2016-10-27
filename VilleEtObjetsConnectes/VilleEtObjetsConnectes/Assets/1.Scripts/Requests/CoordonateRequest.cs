@@ -64,7 +64,7 @@ public class CoordonateRequest : MonoBehaviour {
 
         for(int i =0; i < length; i++)
         {
-            foreach(Player p in GameManager.Instance.Players)
+            foreach(Player p in players)
             {
                 if(p.Id == JNode[i]["id"].AsInt)
                 {

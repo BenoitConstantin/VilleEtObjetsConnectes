@@ -18,7 +18,7 @@ public class GameManager_Game : GameManagerState
         SceneManager.LoadScene(gameSceneName);
         Player[] players = GameManager.Instance.Players;
 
-        for (int i =0; i < players.Length; i++)
+       for (int i =0; i < players.Length; i++)
         {
             players[i].MoveTo(initialGamePosition, 0, true);
             players[i].gameObject.SetActive(true);

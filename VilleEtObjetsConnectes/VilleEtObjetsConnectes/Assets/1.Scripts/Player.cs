@@ -9,7 +9,13 @@ public class Player : MonoBehaviour {
     new Transform transform;
 
     [SerializeField]
-    new string name = "";
+    string playerName = "";
+
+    public string PlayerName
+    {
+        get { return playerName; }
+    }
+
 
     [SerializeField]
     int id = -1;
@@ -49,7 +55,7 @@ public class Player : MonoBehaviour {
         id = _id;
         teamId = _teamId;
 
-        name = _name;
+        playerName = _name;
         nameText.text = _name;
     }
 
@@ -85,6 +91,6 @@ public class Player : MonoBehaviour {
         if (!isValid)
             meshRenderer.material = greyMaterial;
         else
-            meshRenderer.material = teamScriptableObject.teamInfos[teamId].color;
+            meshRenderer.material = teamScriptableObject.teamInfos[teamId].material;
     }
 }

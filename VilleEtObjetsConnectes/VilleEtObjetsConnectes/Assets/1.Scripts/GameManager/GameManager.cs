@@ -27,10 +27,11 @@ public class GameManager : Singleton<GameManager> {
 
     LocationService lService;
 
-    void Start()
+    void Awake()
     {
         lService = new LocationService();
         lService.Start(0.1f);
+        Debug.Log("LocationService : " + lService.isEnabledByUser);
     }
 
 
@@ -78,7 +79,7 @@ public class GameManager : Singleton<GameManager> {
             if (players[i] == null)
                 players[i] = ObjectPool.Instance.GetFromPool("Player").GetComponent<Player>();
 
-             players[i].Init(JNode["id"].AsInt, JNode["team"].AsInt, JNode["name"].Value);
+             players[i].Init(JNode[i]["id"].AsInt, JNode[i]["team"].AsInt, JNode[i]["name"]);
             players[i].gameObject.SetActive(false);
         }
     }
@@ -96,7 +97,7 @@ public class GameManager : Singleton<GameManager> {
 
     IEnumerator UnLockMatchCoroutine()
     {
-        WWWS request = new WWWS(GameManager.Instance.serverAddress + "/reset/", "POST");
+        WWWS request = new WWWS(serverAddress + "/reset/", "POST");
         yield return request.next();
 
         Debug.Log(request.error);
@@ -109,7 +110,14 @@ public class GameManager : Singleton<GameManager> {
 
     IEnumerator LockMatchCoroutine()
     {
-        WWWS request = new WWWS(serverAddress + "/start/", "POST");
+        string[][] formData = new string[2][];
+
+        Vector2 gpsLocation = GPSLocation();
+
+        formData[0] = new string[] { "x", gpsLocation.x.ToString() };
+        formData[1] = new string[] { "y", gpsLocation.y.ToString() };
+
+        WWWS request = new WWWS(serverAddress + "/start/", "POST", formData);
         yield return request.next();
 
         if (!string.IsNullOrEmpty(request.error)  && !request.error.Equals("Null"))
@@ -137,6 +145,7 @@ public class GameManager : Singleton<GameManager> {
 
     public Vector2 GPSLocation()
     {
+        Debug.Log("Location service : " + lService.status);
         return new Vector2(lService.lastData.longitude, lService.lastData.latitude);
     }
 

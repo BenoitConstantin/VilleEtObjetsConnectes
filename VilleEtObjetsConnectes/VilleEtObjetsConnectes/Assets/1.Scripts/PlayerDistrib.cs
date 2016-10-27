@@ -7,7 +7,19 @@ public class PlayerDistrib : MonoBehaviour {
     Text[] equipeRose;
     [SerializeField]
     Text[] equipeNoire;
-	// Use this for initialization
+    [SerializeField]
+    Image[] teamcolors;
+    [SerializeField]
+    TeamScriptableObject TeamColor;
+
+    void Awake()
+    {
+        for (int j=0; j<teamcolors.Length;j++)
+        {
+            teamcolors[j].color = TeamColor.teamInfos[j].color;
+        }
+    }
+
 	void Update()
     {
         for (int k=0; k<equipeRose.Length;k++)
@@ -24,9 +36,11 @@ public class PlayerDistrib : MonoBehaviour {
         for (int i = 0; i <GameManager.Instance.Players.Length; i++)
         {
             if (GameManager.Instance.Players[i].TeamId == 0)
-                equipeRose[cpt1].text = GameManager.Instance.Players[i].name;
+                equipeRose[cpt1].text = GameManager.Instance.Players[i].PlayerName;
+                cpt1++;
             if (GameManager.Instance.Players[i].TeamId == 1)
-                equipeNoire[cpt2].text = GameManager.Instance.Players[i].name;
+                equipeNoire[cpt2].text = GameManager.Instance.Players[i].PlayerName;
+                cpt2++;
         }
     }
 }
