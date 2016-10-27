@@ -122,8 +122,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 167, y: -18.99998}
-  m_SizeDelta: {x: 157, y: 160}
+  m_AnchoredPosition: {x: 187, y: -19.000027}
+  m_SizeDelta: {x: 198, y: 179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &30600550
 MonoBehaviour:
@@ -144,7 +144,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 508dc00793fea114788977b079d04c81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c8431552b8e661840b51aefd78b09444, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1015,6 +1015,10 @@ MonoBehaviour:
   - {fileID: 828604835}
   - {fileID: 1927894735}
   - {fileID: 1024048011}
+  teamcolors:
+  - {fileID: 1071713800}
+  - {fileID: 1818306324}
+  TeamColor: {fileID: 11400000, guid: a1d4fc74c20d3c3409be3553bd3c5443, type: 2}
 --- !u!1 &1008528277
 GameObject:
   m_ObjectHideFlags: 0
