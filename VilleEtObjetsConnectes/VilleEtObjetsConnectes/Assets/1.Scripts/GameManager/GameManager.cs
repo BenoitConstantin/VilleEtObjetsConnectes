@@ -43,13 +43,14 @@ public class GameManager : Singleton<GameManager> {
 
     public void GetPlayers()
     {
-        StartCoroutine(GetPlayersCoroutine(new WWWS(serverAddress + "/player/")));
+        StartCoroutine(GetPlayersCoroutine(new WWW(serverAddress + "/player/")));
     }
 
     int lastUpdate = -1;
-    IEnumerator GetPlayersCoroutine(WWWS request)
+    IEnumerator GetPlayersCoroutine(WWW request)
     {
-        yield return request.next();
+        Debug.Log("Request sended");
+        yield return request;
 
         Debug.Log(request.text);
 
@@ -97,8 +98,11 @@ public class GameManager : Singleton<GameManager> {
 
     IEnumerator UnLockMatchCoroutine()
     {
-        WWWS request = new WWWS(serverAddress + "/reset/", "POST");
-        yield return request.next();
+        WWWForm form = new WWWForm();
+        form.AddField("", "");
+
+        WWW request = new WWW(serverAddress + "/reset/", form);
+        yield return request;
 
         Debug.Log(request.error);
         if(!string.IsNullOrEmpty(request.error) && !request.error.Equals("Null"))
@@ -110,15 +114,16 @@ public class GameManager : Singleton<GameManager> {
 
     IEnumerator LockMatchCoroutine()
     {
-        string[][] formData = new string[2][];
+        //string[][] formData = new string[2][];
 
+        WWWForm formData = new WWWForm();
         Vector2 gpsLocation = GPSLocation();
 
-        formData[0] = new string[] { "x", gpsLocation.x.ToString() };
-        formData[1] = new string[] { "y", gpsLocation.y.ToString() };
+        formData.AddField("x", gpsLocation.x.ToString());
+        formData.AddField("y", gpsLocation.y.ToString());
 
-        WWWS request = new WWWS(serverAddress + "/start/", "POST", formData);
-        yield return request.next();
+        WWW request = new WWW(serverAddress + "/start/", formData);
+        yield return request;
 
         if (!string.IsNullOrEmpty(request.error)  && !request.error.Equals("Null"))
         {

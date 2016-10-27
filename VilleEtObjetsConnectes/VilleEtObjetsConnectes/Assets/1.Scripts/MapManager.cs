@@ -67,7 +67,7 @@ public class MapManager : Singleton<MapManager> {
         {
             ObjectPool.Instance.Pool(flowers[index]);
         }
-        GameObject flower = ObjectPool.Instance.GetFromPool(teamScriptableObject.teamInfos[teamId - 1].flower);
+        GameObject flower = ObjectPool.Instance.GetFromPool(teamScriptableObject.teamInfos[teamId].flower);
         flower.transform.position = new Vector3( ((int) (position.x/caseWidth)) * (caseWidth) , 0,  ((int) (position.y / caseHeight)) * (caseHeight));
         flowers[index] = flower;
     }
@@ -91,13 +91,12 @@ public class MapManager : Singleton<MapManager> {
 
     IEnumerator SendBitMapCoroutine()
     {
-        string[][] formData = new string[1][];
 
+        WWWForm formData = new WWWForm();
+        formData.AddField("map", Newtonsoft.Json.JsonConvert.SerializeObject(bitMap));
 
-        formData[0] = new string[] { "map", Newtonsoft.Json.JsonConvert.SerializeObject(bitMap)};
-
-        WWWS request = new WWWS(GameManager.Instance.ServerAddress + "/map/", "POST", formData);
-        yield return request.next();
+        WWW request = new WWW(GameManager.Instance.ServerAddress + "/map/", formData);
+        yield return request;
 
         lastSendingIsReturned = true;
     }
