@@ -168,7 +168,7 @@ Prefab:
     - target: {fileID: 114000012426458244, guid: 706891d97cd01ec4faa412457865559a,
         type: 2}
       propertyPath: serverAddress
-      value: https://192.168.42.1
+      value: http://192.168.42.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 706891d97cd01ec4faa412457865559a, type: 2}
