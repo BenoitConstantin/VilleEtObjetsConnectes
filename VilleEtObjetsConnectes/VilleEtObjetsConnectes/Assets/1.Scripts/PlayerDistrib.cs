@@ -7,7 +7,19 @@ public class PlayerDistrib : MonoBehaviour {
     Text[] equipeRose;
     [SerializeField]
     Text[] equipeNoire;
-	// Use this for initialization
+    [SerializeField]
+    Image[] teamcolors;
+    [SerializeField]
+    TeamScriptableObject TeamColor;
+
+    void Awake()
+    {
+        for (int j=0; j<teamcolors.Length;j++)
+        {
+            teamcolors[j].color = TeamColor.teamInfos[j].color;
+        }
+    }
+
 	void Update()
     {
         for (int k=0; k<equipeRose.Length;k++)
