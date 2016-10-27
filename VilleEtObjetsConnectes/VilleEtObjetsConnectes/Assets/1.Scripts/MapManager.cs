@@ -2,7 +2,9 @@
 using System.Collections;
 using EquilibreGames;
 
-public class MapManager : MonoBehaviour {
+public class MapManager : Singleton<MapManager> {
+
+
 
 
     // 0 aucune équipe n'a la case
@@ -37,26 +39,7 @@ public class MapManager : MonoBehaviour {
     }
 
 
-    void Update()
-    {
-        foreach(Player p in GameManager.Instance.Players)
-        {
-            Vector3 position = p.transform.position;
-
-            if (!Physics.Raycast(position, Vector3.down, Mathf.Infinity))
-            {
-                p.ValidPosition(false);
-            }
-            else
-            {
-                p.ValidPosition(true);
-                Conquere(new Vector2(position.x, position.z), p.TeamId);
-            }
-        }
-    }
-
-
-    void Conquere(Vector2 position, int teamId)
+    public void Conquer(Vector2 position, int teamId)
     {
         float caseWidth = mapWidth / gridWidth;
         float caseHeight = mapHeight / gridLength;
@@ -75,5 +58,22 @@ public class MapManager : MonoBehaviour {
 
     }
 
+
+    public void GetMapConquer(out int percentTeam1, out int percentTeam2)
+    {
+        int cpt1 = 0;
+        int cpt2 = 0;
+
+        for(int i =0; i < bitMap.Length; i++)
+        {
+            if (bitMap[i] == 0)
+                cpt1++;
+            else if (bitMap[i] == 1)
+                cpt2++;
+        }
+
+        percentTeam1 = cpt1 / bitMap.Length;
+        percentTeam2 = cpt2 / bitMap.Length;
+    }
 
 }
