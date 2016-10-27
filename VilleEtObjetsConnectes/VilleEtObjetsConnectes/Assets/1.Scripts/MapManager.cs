@@ -5,6 +5,8 @@ using EquilibreGames;
 public class MapManager : Singleton<MapManager> {
 
 
+
+
     // 0 aucune équipe n'a la case
     // 1 l'équipe 1 à la case
     // 2 l'équipe 2 à la case
@@ -37,9 +39,7 @@ public class MapManager : Singleton<MapManager> {
     }
 
 
-
-
-    public void Conquere(Vector2 position, int teamId)
+    public void Conquer(Vector2 position, int teamId)
     {
         float caseWidth = mapWidth / gridWidth;
         float caseHeight = mapHeight / gridLength;
@@ -58,5 +58,22 @@ public class MapManager : Singleton<MapManager> {
 
     }
 
+
+    public void GetMapConquer(out int percentTeam1, out int percentTeam2)
+    {
+        int cpt1 = 0;
+        int cpt2 = 0;
+
+        for(int i =0; i < bitMap.Length; i++)
+        {
+            if (bitMap[i] == 0)
+                cpt1++;
+            else if (bitMap[i] == 1)
+                cpt2++;
+        }
+
+        percentTeam1 = cpt1 / bitMap.Length;
+        percentTeam2 = cpt2 / bitMap.Length;
+    }
 
 }

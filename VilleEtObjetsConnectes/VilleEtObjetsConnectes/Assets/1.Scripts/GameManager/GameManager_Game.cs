@@ -31,7 +31,7 @@ public class GameManager_Game : GameManagerState
 
     void Update()
     {
-        foreach (Player p in players)
+        foreach (Player p in gameManager.Players)
         {
             Vector3 position = p.transform.position;
 
@@ -42,7 +42,7 @@ public class GameManager_Game : GameManagerState
             else
             {
                 p.ValidPosition(true);
-                MapManager.Instance.Conquere(new Vector2(position.x, position.z), p.TeamId);
+                MapManager.Instance.Conquer(new Vector2(position.x, position.z), p.TeamId);
             }
         }
     }
