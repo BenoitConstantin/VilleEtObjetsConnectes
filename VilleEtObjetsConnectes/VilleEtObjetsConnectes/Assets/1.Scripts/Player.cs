@@ -57,6 +57,7 @@ public class Player : MonoBehaviour {
 
         playerName = _name;
         nameText.text = _name;
+        nameText.color = teamScriptableObject.teamInfos[_teamId].color;
     }
 
 
