@@ -11,6 +11,9 @@ public class GameManager_Game : GameManagerState
     [SerializeField]
     string gameSceneName = "Game";
 
+    [SerializeField]
+    float matchDuration = 3f;
+
 
     public override void OnActivation(string previousState, string info = "")
     {
@@ -25,7 +28,9 @@ public class GameManager_Game : GameManagerState
         }
 
        gameManager.LockMatch();
-       gameManager.coordonateRequest.StartRequest();    
+       gameManager.coordonateRequest.StartRequest();
+
+       gameManager.gameTimer = matchDuration;
     }
 
 
@@ -44,6 +49,13 @@ public class GameManager_Game : GameManagerState
                 p.ValidPosition(true);
                 MapManager.Instance.Conquer(new Vector2(position.x, position.z), p.TeamId);
             }
+        }
+
+        gameManager.gameTimer -= Time.deltaTime;
+
+        if(gameManager.gameTimer <= 0)
+        {
+            this.stateMachine.ChangeState("End");
         }
     }
 

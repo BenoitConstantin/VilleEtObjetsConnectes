@@ -75,6 +75,7 @@ GameObject:
   - 114: {fileID: 114000011204214470}
   - 114: {fileID: 114000013432092604}
   - 114: {fileID: 114000013675668842}
+  - 114: {fileID: 114000012340097184}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -153,6 +154,8 @@ MonoBehaviour:
   subStatesList: []
   gameManager: {fileID: 114000012426458244}
   initialGamePosition: {x: 0, y: 0}
+  gameSceneName: Game
+  matchDuration: 540
 --- !u!114 &114000011909891482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,15 +189,21 @@ MonoBehaviour:
   poolObjectList:
   - kind: FlowerBlue
     tag: Flower
-    prefab: {fileID: 1000013852073478, guid: e09b99529072a8d43977dde56a110dc1, type: 2}
+    prefab: {fileID: 1000012556985158, guid: 3f51ee1beeea10241b66ee2b3f87dfd0, type: 2}
     bufferCount: 500
     maxCount: 800
     defaultParent: {fileID: 4000011912499424}
   - kind: FlowerRed
     tag: Flower
-    prefab: {fileID: 1000010766796620, guid: 9f7156b8dfba2824a9a02e38fad073da, type: 2}
+    prefab: {fileID: 1000011010571968, guid: 20b5ec6f373b53b46abd0e7d615754a1, type: 2}
     bufferCount: 500
     maxCount: 800
+    defaultParent: {fileID: 4000011912499424}
+  - kind: Player
+    tag: Player
+    prefab: {fileID: 1000011744817400, guid: 89ce14e37e729944fbbfca13e4990bed, type: 2}
+    bufferCount: 8
+    maxCount: 10
     defaultParent: {fileID: 4000011912499424}
   prefixPooledScene: Pooled_
   poolSceneList: []
@@ -212,6 +221,22 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!114 &114000012340097184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014248585832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0039fef24692bbb4e8ec06eaab505afe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  named: 
+  subStatesList: []
+  gameManager: {fileID: 114000012426458244}
+  gameSceneName: Game
 --- !u!114 &114000012380574386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,6 +249,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetween2Update: 0.25
+  borderLeftTopGPS: {x: 45.649094, y: 0.162107}
+  borderRightTopGPS: {x: 45.6491, y: 0.162387}
+  borderLeftBotGPS: {x: 45.648792, y: 0.162458}
+  borderRightBotGPS: {x: 45.648827, y: 0.162153}
 --- !u!114 &114000012426458244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,12 +264,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf95eb9697de3cd4fa7349eb51284cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddress: 10.1.62.79
+  serverAddress: http://192.168.42.1
   stateMachine: {fileID: 114000012483660780}
   players: []
   playerPrefab: {fileID: 1000011744817400, guid: 89ce14e37e729944fbbfca13e4990bed,
     type: 2}
   coordonateRequest: {fileID: 114000012380574386}
+  gameTimer: -1
 --- !u!114 &114000012483660780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,6 +290,7 @@ MonoBehaviour:
   - {fileID: 114000012763152432}
   - {fileID: 114000013432092604}
   - {fileID: 114000013675668842}
+  - {fileID: 114000012340097184}
   initialState: {fileID: 114000012763152432}
   anyState: {fileID: 0}
   historicLength: 0

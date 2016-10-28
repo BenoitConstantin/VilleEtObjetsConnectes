@@ -25,4 +25,10 @@ public class GameManagerState : State {
         this.stateMachine.ChangeState("Connect");
         return true;
     }
+
+    public virtual bool StopGame()
+    {
+        this.stateMachine.ChangeState("TouchToPlay");
+        return true;
+    }
 }

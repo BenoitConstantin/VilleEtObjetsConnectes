@@ -25,6 +25,8 @@ public class GameManager : Singleton<GameManager> {
         get { return players; }
     }
 
+    public float gameTimer = -1;
+
 
         IEnumerator Start()
     {
@@ -179,6 +181,11 @@ public class GameManager : Singleton<GameManager> {
     public bool LaunchConnect()
     {
         return ((GameManagerState)(this.stateMachine.CurrentState)).LaunchConnect();
+    }
+
+    public bool StopGame()
+    {
+        return ((GameManagerState)(this.stateMachine.CurrentState)).StopGame();
     }
 
     public Vector2 GPSLocation()
