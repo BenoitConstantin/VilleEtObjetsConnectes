@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamInfos:
   - color: {r: 0.9411765, g: 0.5030426, b: 0.85097253, a: 0.922}
-    material: {fileID: 2100000, guid: 7463b669bc205f64c9d64b46e9668213, type: 2}
+    material: {fileID: 2100000, guid: d7e6166f6bc3654469d1afe22bfa8e26, type: 2}
     flower: FlowerBlue
   - color: {r: 0, g: 0, b: 0, a: 1}
-    material: {fileID: 2100000, guid: a9d213101fe0598409110050cb5ac96f, type: 2}
+    material: {fileID: 2100000, guid: bfb727a63871b1c4c90271e610a9246f, type: 2}
     flower: FlowerRed

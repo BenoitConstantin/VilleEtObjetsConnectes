@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField]
     GameObject playerPrefab;
 
+    public float matchDuration = 3f;
+
     public CoordonateRequest coordonateRequest;
 
     public Player[] Players

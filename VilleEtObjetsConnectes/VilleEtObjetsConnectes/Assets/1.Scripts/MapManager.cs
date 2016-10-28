@@ -45,10 +45,20 @@ public class MapManager : Singleton<MapManager> {
     Vector2 borderRightBot;
 
     [SerializeField]
-    AudioSource[] Musics;
+    AudioSource backgroundMusic;
 
     [SerializeField]
-    Text Chrono;
+    AudioSource team1Music;
+
+    [SerializeField]
+    AudioSource team2Music;
+
+    [SerializeField]
+    AnimationCurve audioCurve;
+
+    [SerializeField]
+    Image timerFillingImage;
+
 
     Vector2 translation;
     Vector2 columnTransformationMatrix1;
@@ -60,9 +70,15 @@ public class MapManager : Singleton<MapManager> {
     float timer = -1;
     bool lastSendingIsReturned = true;
 
+    float maxTime;
+
     void Awake()
     {
         bitMap = new int[gridWidth * gridLength];
+
+        for (int i = 0; i < bitMap.Length; i++)
+            bitMap[i] = -1;
+
         flowers = new GameObject[gridWidth * gridLength];
 
 
@@ -72,7 +88,7 @@ public class MapManager : Singleton<MapManager> {
         Vector2 columnTransformationMatrix1 = borderLeftTop - borderLeftBot;
         Vector2 columnTransformationMatrix2 = borderRightBot - borderLeftBot;
 
-        Musics[0].Play();
+        backgroundMusic.Play();
     }
 
 
@@ -86,6 +102,18 @@ public class MapManager : Singleton<MapManager> {
             timer = Time.time + sendingTime;
             lastSendingIsReturned = false;
         }
+
+        timerFillingImage.fillAmount = 1 - GameManager.Instance.gameTimer / GameManager.Instance.matchDuration;
+
+        float team1Score;
+        float team2Score;
+        GetMapConquer(out team1Score, out team2Score);
+
+        float deltaScore = team1Score - team2Score;
+        Debug.Log(deltaScore);
+
+        team1Music.volume = audioCurve.Evaluate(0.5f + deltaScore);
+        team2Music.volume = audioCurve.Evaluate(0.5f - deltaScore);
     }
 
 
@@ -141,7 +169,7 @@ public class MapManager : Singleton<MapManager> {
     }
 
 
-    public void GetMapConquer(out int percentTeam1, out int percentTeam2)
+    public void GetMapConquer(out float percentTeam1, out float percentTeam2)
     {
         int cpt1 = 0;
         int cpt2 = 0;
@@ -157,16 +185,6 @@ public class MapManager : Singleton<MapManager> {
         percentTeam1 = cpt1 / bitMap.Length;
         percentTeam2 = cpt2 / bitMap.Length;
 
-        if (percentTeam1 > percentTeam2)
-        {
-            Musics[1].Play();
-            Musics[2].Stop();
-        }
-        else
-        {
-            Musics[1].Stop();
-            Musics[2].Play();
-        }
     }
 
 }

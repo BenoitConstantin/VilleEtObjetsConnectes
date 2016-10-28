@@ -11,9 +11,6 @@ public class GameManager_Game : GameManagerState
     [SerializeField]
     string gameSceneName = "Game";
 
-    [SerializeField]
-    float matchDuration = 3f;
-
 
     public override void OnActivation(string previousState, string info = "")
     {
@@ -30,7 +27,7 @@ public class GameManager_Game : GameManagerState
        gameManager.LockMatch();
        gameManager.coordonateRequest.StartRequest();
 
-       gameManager.gameTimer = matchDuration;
+       gameManager.gameTimer = gameManager.matchDuration;
     }
 
 

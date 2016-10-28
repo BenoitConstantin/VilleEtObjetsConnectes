@@ -155,7 +155,6 @@ MonoBehaviour:
   gameManager: {fileID: 114000012426458244}
   initialGamePosition: {x: 0, y: 0}
   gameSceneName: Game
-  matchDuration: 540
 --- !u!114 &114000011909891482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,6 +268,7 @@ MonoBehaviour:
   players: []
   playerPrefab: {fileID: 1000011744817400, guid: 89ce14e37e729944fbbfca13e4990bed,
     type: 2}
+  matchDuration: 180
   coordonateRequest: {fileID: 114000012380574386}
   gameTimer: -1
 --- !u!114 &114000012483660780
