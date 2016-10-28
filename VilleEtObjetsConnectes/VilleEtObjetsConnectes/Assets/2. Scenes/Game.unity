@@ -227,7 +227,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 947960648}
   - 82: {fileID: 947960650}
-  - 81: {fileID: 947960649}
   m_Layer: 0
   m_Name: Audio Source General
   m_TagString: Untagged
@@ -248,13 +247,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 920320942}
   m_RootOrder: 4
---- !u!81 &947960649
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 947960647}
-  m_Enabled: 1
 --- !u!82 &947960650
 AudioSource:
   m_ObjectHideFlags: 0
@@ -338,7 +330,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1121763567}
   - 82: {fileID: 1121763569}
-  - 81: {fileID: 1121763568}
   m_Layer: 0
   m_Name: Audio Source TeamB
   m_TagString: Untagged
@@ -359,13 +350,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 920320942}
   m_RootOrder: 6
---- !u!81 &1121763568
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1121763566}
-  m_Enabled: 1
 --- !u!82 &1121763569
 AudioSource:
   m_ObjectHideFlags: 0
@@ -449,7 +433,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1945621531}
   - 82: {fileID: 1945621533}
-  - 81: {fileID: 1945621532}
   m_Layer: 0
   m_Name: Audio Source TeamA
   m_TagString: Untagged
@@ -470,13 +453,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 920320942}
   m_RootOrder: 5
---- !u!81 &1945621532
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1945621530}
-  m_Enabled: 1
 --- !u!82 &1945621533
 AudioSource:
   m_ObjectHideFlags: 0
