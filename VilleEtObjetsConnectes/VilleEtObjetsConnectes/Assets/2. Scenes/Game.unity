@@ -138,6 +138,10 @@ MonoBehaviour:
   teamScriptableObject: {fileID: 11400000, guid: a1d4fc74c20d3c3409be3553bd3c5443,
     type: 2}
   sendingTime: 0.25
+  borderLeftTop: {x: -9, y: 9}
+  borderRightTop: {x: 9, y: 9}
+  borderLeftBot: {x: -9, y: -9}
+  borderRightBot: {x: 9, y: -9}
 --- !u!65 &90420030
 BoxCollider:
   m_ObjectHideFlags: 0

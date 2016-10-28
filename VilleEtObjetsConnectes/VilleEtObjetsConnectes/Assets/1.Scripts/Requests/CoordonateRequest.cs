@@ -8,11 +8,46 @@ public class CoordonateRequest : MonoBehaviour {
     [SerializeField]
     float timeBetween2Update = 0.25f;
 
+
     [SerializeField]
-    float mapScale = 0.01f;
+    Vector2 borderLeftTopGPS;
+
+    [SerializeField]
+    Vector2 borderRightTopGPS;
+
+    [SerializeField]
+    Vector2 borderLeftBotGPS;
+
+    [SerializeField]
+    Vector2 borderRightBotGPS;
+
 
     float timer = -1;
     long lastUpdate = -1;
+
+
+    Vector2 translation;
+    Vector2 columnTransformationMatrix1;
+    Vector2 columnTransformationMatrix2;
+
+    void Awake()
+    {
+        //Fing the matrix transformation that send GPS coordonate to the ortho-normalized base
+        translation = -borderLeftTopGPS;
+
+
+        //from ortho-normalized to GPS
+        columnTransformationMatrix1 = borderLeftTopGPS - borderLeftBotGPS;
+        columnTransformationMatrix2 = borderRightBotGPS - borderLeftBotGPS;
+
+        //from GPD to ortho-normalized
+        float det = (columnTransformationMatrix1.x * columnTransformationMatrix2.y - columnTransformationMatrix1.y * columnTransformationMatrix2.x);
+
+        columnTransformationMatrix1 = 1f / det * new Vector2(columnTransformationMatrix2.y, -columnTransformationMatrix1.y);
+        columnTransformationMatrix2 = 1f / det * new Vector2(-columnTransformationMatrix2.x, columnTransformationMatrix1.x);
+    }
+
+
 
     public void StartRequest()
     {
@@ -68,7 +103,8 @@ public class CoordonateRequest : MonoBehaviour {
             {
                 if(p.Id == JNode[i]["id"].AsInt)
                 {
-                    p.MoveTo(new Vector2(mapScale*JNode[i]["x"].AsFloat, mapScale * JNode[i]["y"].AsFloat), deltaTime/1000);
+                    //Apply transformation matrix to GPS coordonate
+                    p.MoveTo(new Vector2((JNode[i]["x"].AsFloat* columnTransformationMatrix1.x + JNode[i]["y"].AsFloat* columnTransformationMatrix2.x), (JNode[i]["x"].AsFloat * columnTransformationMatrix1.y + JNode[i]["y"].AsFloat * columnTransformationMatrix2.y)) + translation, deltaTime/1000);
                 }
             }
         } 
