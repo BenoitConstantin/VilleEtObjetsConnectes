@@ -155,7 +155,7 @@ MonoBehaviour:
   gameManager: {fileID: 114000012426458244}
   initialGamePosition: {x: 0, y: 0}
   gameSceneName: Game
-  matchDuration: 3
+  matchDuration: 540
 --- !u!114 &114000011909891482
 MonoBehaviour:
   m_ObjectHideFlags: 1
