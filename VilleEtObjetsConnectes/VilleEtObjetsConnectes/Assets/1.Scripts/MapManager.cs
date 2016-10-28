@@ -3,6 +3,7 @@ using System.Collections;
 using EquilibreGames;
 using SimpleJSON;
 using Newtonsoft;
+using UnityEngine.UI;
 
 public class MapManager : Singleton<MapManager> {
 
@@ -45,6 +46,9 @@ public class MapManager : Singleton<MapManager> {
 
     [SerializeField]
     AudioSource[] Musics;
+
+    [SerializeField]
+    Text Chrono;
 
     Vector2 translation;
     Vector2 columnTransformationMatrix1;
