@@ -97,16 +97,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114000012483660780, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: statesList.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4000013517618206, guid: 706891d97cd01ec4faa412457865559a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -139,93 +129,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[2].kind
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[2].tag
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[2].prefab
-      value: 
-      objectReference: {fileID: 1000011744817400, guid: 89ce14e37e729944fbbfca13e4990bed,
-        type: 2}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[2].bufferCount
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[2].maxCount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[2].defaultParent
-      value: 
-      objectReference: {fileID: 977688144}
-    - target: {fileID: 114000012426458244, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: serverAddress
-      value: http://192.168.42.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[1].prefab
-      value: 
-      objectReference: {fileID: 1000011010571968, guid: 20b5ec6f373b53b46abd0e7d615754a1,
-        type: 2}
-    - target: {fileID: 114000012327739136, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: poolObjectList.Array.data[0].prefab
-      value: 
-      objectReference: {fileID: 1000012556985158, guid: 3f51ee1beeea10241b66ee2b3f87dfd0,
-        type: 2}
-    - target: {fileID: 114000012483660780, guid: 706891d97cd01ec4faa412457865559a,
-        type: 2}
-      propertyPath: statesList.Array.data[5]
-      value: 
-      objectReference: {fileID: 804645776}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 706891d97cd01ec4faa412457865559a, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &804645774 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000012426458244, guid: 706891d97cd01ec4faa412457865559a,
-    type: 2}
-  m_PrefabInternal: {fileID: 804645773}
-  m_Script: {fileID: 11500000, guid: bf95eb9697de3cd4fa7349eb51284cea, type: 3}
---- !u!1 &804645775 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000014248585832, guid: 706891d97cd01ec4faa412457865559a,
-    type: 2}
-  m_PrefabInternal: {fileID: 804645773}
---- !u!114 &804645776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 804645775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0039fef24692bbb4e8ec06eaab505afe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateMachine: {fileID: 0}
-  named: 
-  subStatesList: []
-  gameManager: {fileID: 804645774}
---- !u!4 &977688144 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4000011912499424, guid: 706891d97cd01ec4faa412457865559a,
-    type: 2}
-  m_PrefabInternal: {fileID: 804645773}
 --- !u!1 &1503377296
 GameObject:
   m_ObjectHideFlags: 0
