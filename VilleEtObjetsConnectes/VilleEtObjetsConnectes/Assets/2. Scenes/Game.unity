@@ -142,6 +142,10 @@ MonoBehaviour:
   borderRightTop: {x: 9, y: 9}
   borderLeftBot: {x: -9, y: -9}
   borderRightBot: {x: 9, y: -9}
+  Musics:
+  - {fileID: 947960650}
+  - {fileID: 1945621533}
+  - {fileID: 1121763569}
 --- !u!65 &90420030
 BoxCollider:
   m_ObjectHideFlags: 0

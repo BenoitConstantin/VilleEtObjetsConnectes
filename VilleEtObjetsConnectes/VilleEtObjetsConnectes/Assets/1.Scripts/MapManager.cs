@@ -43,6 +43,8 @@ public class MapManager : Singleton<MapManager> {
     [SerializeField]
     Vector2 borderRightBot;
 
+    [SerializeField]
+    AudioSource[] Musics;
 
     Vector2 translation;
     Vector2 columnTransformationMatrix1;
@@ -65,6 +67,8 @@ public class MapManager : Singleton<MapManager> {
 
         Vector2 columnTransformationMatrix1 = borderLeftTop - borderLeftBot;
         Vector2 columnTransformationMatrix2 = borderRightBot - borderLeftBot;
+
+        Musics[0].Play();
     }
 
 
@@ -148,6 +152,17 @@ public class MapManager : Singleton<MapManager> {
 
         percentTeam1 = cpt1 / bitMap.Length;
         percentTeam2 = cpt2 / bitMap.Length;
+
+        if (percentTeam1 > percentTeam2)
+        {
+            Musics[1].Play();
+            Musics[2].Stop();
+        }
+        else
+        {
+            Musics[1].Stop();
+            Musics[2].Play();
+        }
     }
 
 }
