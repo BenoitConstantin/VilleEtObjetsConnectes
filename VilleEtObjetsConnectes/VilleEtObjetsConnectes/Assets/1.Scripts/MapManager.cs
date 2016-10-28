@@ -30,6 +30,24 @@ public class MapManager : Singleton<MapManager> {
     [SerializeField]
     float sendingTime = 0.25f;
 
+
+    [SerializeField]
+    Vector2 borderLeftTop;
+
+    [SerializeField]
+    Vector2 borderRightTop;
+
+    [SerializeField]
+    Vector2 borderLeftBot;
+
+    [SerializeField]
+    Vector2 borderRightBot;
+
+
+    Vector2 translation;
+    Vector2 columnTransformationMatrix1;
+    Vector2 columnTransformationMatrix2;
+
     int[] bitMap;
     GameObject[] flowers;
 
@@ -40,7 +58,16 @@ public class MapManager : Singleton<MapManager> {
     {
         bitMap = new int[gridWidth * gridLength];
         flowers = new GameObject[gridWidth * gridLength];
+
+
+        //Fing the matrix transformation that send ortho-normalized coordonate to the mapCoordonate
+        translation = -borderLeftTop;
+
+        Vector2 columnTransformationMatrix1 = borderLeftTop - borderLeftBot;
+        Vector2 columnTransformationMatrix2 = borderRightBot - borderLeftBot;
     }
+
+
 
 
     void Update()
@@ -56,6 +83,10 @@ public class MapManager : Singleton<MapManager> {
 
     public void Conquer(Vector2 position, int teamId)
     {
+        position.x = (position.x * columnTransformationMatrix1.x + position.y * columnTransformationMatrix2.x);
+        position.y = (position.x * columnTransformationMatrix1.y + position.y * columnTransformationMatrix2.y);
+        position += translation;
+
         float caseWidth = mapWidth / gridWidth;
         float caseHeight = mapHeight / gridLength;
 
