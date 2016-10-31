@@ -248,10 +248,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetween2Update: 0.25
-  borderLeftTopGPS: {x: 45.649094, y: 0.162107}
-  borderRightTopGPS: {x: 45.6491, y: 0.162387}
-  borderLeftBotGPS: {x: 45.648792, y: 0.162458}
-  borderRightBotGPS: {x: 45.648827, y: 0.162153}
+  borderLeftTopGPS: {x: 0.162107, y: 45.64909}
+  borderRightTopGPS: {x: 0.162387, y: 45.64909}
+  borderLeftBotGPS: {x: 0.162173, y: 45.64877}
+  borderRightBotGPS: {x: 0.162453, y: 45.64877}
 --- !u!114 &114000012426458244
 MonoBehaviour:
   m_ObjectHideFlags: 1
