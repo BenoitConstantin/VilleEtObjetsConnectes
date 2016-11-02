@@ -64,6 +64,7 @@ public class MapManager : Singleton<MapManager> {
     Vector2 columnTransformationMatrix1;
     Vector2 columnTransformationMatrix2;
 
+
     int[] bitMap;
     GameObject[] flowers;
 
@@ -71,6 +72,8 @@ public class MapManager : Singleton<MapManager> {
     bool lastSendingIsReturned = true;
 
     float maxTime;
+
+    GameObject gameManager;
 
     void Awake()
     {
@@ -87,6 +90,8 @@ public class MapManager : Singleton<MapManager> {
 
         Vector2 columnTransformationMatrix1 = borderLeftTop - borderLeftBot;
         Vector2 columnTransformationMatrix2 = borderRightBot - borderLeftBot;
+
+        gameManager = GameObject.Find("GameManager");
 
         backgroundMusic.Play();
     }
@@ -110,7 +115,6 @@ public class MapManager : Singleton<MapManager> {
         GetMapConquer(out team1Score, out team2Score);
 
         float deltaScore = team1Score - team2Score;
-        Debug.Log(deltaScore);
 
         team1Music.volume = audioCurve.Evaluate(0.5f + deltaScore);
         team2Music.volume = audioCurve.Evaluate(0.5f - deltaScore);
@@ -119,7 +123,7 @@ public class MapManager : Singleton<MapManager> {
 
     public void Conquer(Vector2 position, int teamId)
     {
-        position.x = (position.x * columnTransformationMatrix1.x + position.y * columnTransformationMatrix2.x);
+        /*position.x = (position.x * columnTransformationMatrix1.x + position.y * columnTransformationMatrix2.x);
         position.y = (position.x * columnTransformationMatrix1.y + position.y * columnTransformationMatrix2.y);
         position += translation;
 
@@ -127,16 +131,36 @@ public class MapManager : Singleton<MapManager> {
         float caseHeight = mapHeight / gridLength;
 
         int index = ((int)(position.y/(caseHeight)) * gridWidth) + ((int)(position.x/(caseWidth))) + ((int)(gridLength*gridWidth/2f)) ;
+        */
+        Vector2 normalizedPosition = new Vector2((position.x - borderLeftTop.x) / mapWidth, -(position.y - borderLeftTop.y) / mapHeight); //gameManager.GetComponent<CoordonateRequest>().GetNormalizedCoordinates(position);
+        if (normalizedPosition.x > 1 || normalizedPosition.y > 1)
+            return;
+        int index = (int)(normalizedPosition.y*gridLength)*gridWidth + (int)(normalizedPosition.x*gridWidth);
 
         bitMap[index] = teamId;
 
         if(flowers[index] != null)
         {
-            ObjectPool.Instance.Pool(flowers[index]);
+            if(flowers[index].name != teamScriptableObject.teamInfos[teamId].flower)
+            {
+                Debug.Log("Pool");
+                ObjectPool.Instance.Pool(flowers[index]);
+                Debug.Log("Alloc change =>" + teamScriptableObject.teamInfos[teamId].flower);
+                GameObject flower = ObjectPool.Instance.GetFromPool(teamScriptableObject.teamInfos[teamId].flower);
+                //flower.transform.position = new Vector3(((int)(position.x / caseWidth)) * (caseWidth), 0, ((int)(position.y / caseHeight)) * (caseHeight));
+                flower.transform.position = new Vector3(borderLeftTop.x + normalizedPosition.x * mapWidth,0, borderLeftTop.y - normalizedPosition.y * mapHeight);
+
+                flowers[index] = flower;
+            }
         }
-        GameObject flower = ObjectPool.Instance.GetFromPool(teamScriptableObject.teamInfos[teamId].flower);
-        flower.transform.position = new Vector3( ((int) (position.x/caseWidth)) * (caseWidth) , 0,  ((int) (position.y / caseHeight)) * (caseHeight));
-        flowers[index] = flower;
+        else
+        {
+            GameObject flower = ObjectPool.Instance.GetFromPool(teamScriptableObject.teamInfos[teamId].flower);
+            //flower.transform.position = new Vector3(((int)(position.x / caseWidth)) * (caseWidth), 0, ((int)(position.y / caseHeight)) * (caseHeight));
+            flower.transform.position = new Vector3(borderLeftTop.x + normalizedPosition.x * mapWidth, 0, borderLeftTop.y - normalizedPosition.y * mapHeight);
+            Debug.Log("Alloc new =>" + teamScriptableObject.teamInfos[teamId].flower + "=>" + flower.transform.position + "=>" + normalizedPosition);
+            flowers[index] = flower;
+        }
     }
 
 
