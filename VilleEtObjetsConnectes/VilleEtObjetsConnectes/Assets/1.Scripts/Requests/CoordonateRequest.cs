@@ -42,7 +42,9 @@ public class CoordonateRequest : MonoBehaviour {
         Vector2 pt_offset = p - borderLeftTopGPS;
         Vector2 scaled = new Vector2();
         scaled.y = -pt_offset.y / _Height;
-        scaled.x = (pt_offset.x + _Shear_amount * scaled.y) / _Width;
+
+        var offsetX = _Shear_amount * Mathf.Abs(scaled.y);
+        scaled.x = (pt_offset.x + offsetX) / _Width;
         return scaled;
     }
 
