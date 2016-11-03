@@ -12,6 +12,7 @@ public class TeamScriptableObject : ScriptableObject {
     {
         public Color color;
         public Material material;
+        public Material trailMaterial;
         public string flower;
     }
 

@@ -30,6 +30,9 @@ public class Player : MonoBehaviour {
     MeshRenderer[] meshRenderers;
 
     [SerializeField]
+    TrailRenderer trailRenderer;
+
+    [SerializeField]
     TeamScriptableObject teamScriptableObject;
 
     [SerializeField]
@@ -58,10 +61,10 @@ public class Player : MonoBehaviour {
         playerName = _name;
         nameText.text = _name;
         nameText.color = teamScriptableObject.teamInfos[_teamId].color;
+
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
-
-
-
 
     public void MoveTo(Vector2 position, float deltaTime, bool directPos = false)
     {
@@ -98,6 +101,8 @@ public class Player : MonoBehaviour {
         {
             foreach (MeshRenderer meshRenderer in meshRenderers)
                 meshRenderer.material = teamScriptableObject.teamInfos[teamId].material;
+
+            trailRenderer.material = teamScriptableObject.teamInfos[teamId].trailMaterial;
         }
     }
 }

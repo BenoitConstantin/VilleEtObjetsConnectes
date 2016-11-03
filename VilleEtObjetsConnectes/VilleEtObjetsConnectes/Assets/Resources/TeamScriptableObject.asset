@@ -14,7 +14,9 @@ MonoBehaviour:
   teamInfos:
   - color: {r: 0, g: 0, b: 0, a: 0.922}
     material: {fileID: 2100000, guid: d7e6166f6bc3654469d1afe22bfa8e26, type: 2}
+    trailMaterial: {fileID: 2100000, guid: f84de366700c79b43a7e360fd3b5c3ec, type: 2}
     flower: FlowerBlue
   - color: {r: 0.94117653, g: 0.5019608, b: 0.85098046, a: 1}
     material: {fileID: 2100000, guid: bfb727a63871b1c4c90271e610a9246f, type: 2}
+    trailMaterial: {fileID: 2100000, guid: 88e7617c0d6a47c438f2e7ee535b3da1, type: 2}
     flower: FlowerRed
