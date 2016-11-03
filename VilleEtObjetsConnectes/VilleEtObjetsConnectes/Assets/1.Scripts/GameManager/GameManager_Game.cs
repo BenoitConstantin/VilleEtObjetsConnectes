@@ -16,20 +16,7 @@ public class GameManager_Game : GameManagerState
     {
         base.OnActivation(previousState, info);
         SceneManager.LoadScene(gameSceneName);
-        Player[] players = GameManager.Instance.Players;
-
-       for (int i =0; i < players.Length; i++)
-        {
-            players[i].MoveTo(initialGamePosition, 0, true);
-            players[i].gameObject.SetActive(true);
-        }
-
-       gameManager.LockMatch();
-       gameManager.coordonateRequest.StartRequest();
-
-       gameManager.gameTimer = gameManager.matchDuration;
     }
-
 
     void Update()
     {

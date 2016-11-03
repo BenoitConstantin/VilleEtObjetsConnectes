@@ -88,8 +88,6 @@ public class MapManager : Singleton<MapManager> {
 
     float maxTime;
 
-    GameObject gameManager;
-
     void Awake()
     {
         bitMap = new int[gridWidth * gridLength];
@@ -105,8 +103,6 @@ public class MapManager : Singleton<MapManager> {
 
         Vector2 columnTransformationMatrix1 = borderLeftTop - borderLeftBot;
         Vector2 columnTransformationMatrix2 = borderRightBot - borderLeftBot;
-
-        gameManager = GameObject.Find("GameManager");
     }
 
     private void MapManager_OnEndGame()
@@ -116,9 +112,27 @@ public class MapManager : Singleton<MapManager> {
 
     void Start()
     {
+        _InitMatch();
         backgroundMusic.Play();
         team1Music.Play();
         team2Music.Play();
+    }
+
+    private void _InitMatch()
+    {
+        GameManager.Instance.LockMatch();
+
+        GameManager.Instance.coordonateRequest.StartRequest();
+
+        GameManager.Instance.gameTimer = GameManager.Instance.matchDuration;
+
+        Player[] players = GameManager.Instance.Players;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].MoveTo(new Vector2(-99,-99), 0, true);
+            players[i].gameObject.SetActive(true);
+        }
     }
 
     void Update()
@@ -136,19 +150,23 @@ public class MapManager : Singleton<MapManager> {
         float team2Score;
         GetMapConquer(out team1Score, out team2Score);
 
+        float total = team1Score + team2Score;
         float deltaScore = team1Score - team2Score;
         _UpdateScoreScreen(team1Score, team2Score);
 
-        team1Music.volume = audioCurve.Evaluate(0.5f + deltaScore);
-        team2Music.volume = audioCurve.Evaluate(0.5f - deltaScore);
-
-
+        if(total != 0)
+        {
+            //team1Music.volume = audioCurve.Evaluate(0.5f + deltaScore);
+            //team2Music.volume = audioCurve.Evaluate(0.5f - deltaScore);
+            team1Music.volume = audioCurve.Evaluate(team1Score/total);
+            team2Music.volume = audioCurve.Evaluate(team2Score/total);
+        }
     }
 
     private void _UpdateScoreScreen(float team1Score, float team2Score)
     {
-        var scoreAFloor = Mathf.FloorToInt(team1Score);
-        var scoreBFloor = Mathf.FloorToInt(team2Score);
+        var scoreAFloor = Mathf.FloorToInt(team1Score*100);
+        var scoreBFloor = Mathf.FloorToInt(team2Score*100);
 
         if (scoreAFloor == 50)
         {
@@ -246,8 +264,8 @@ public class MapManager : Singleton<MapManager> {
 
     public void GetMapConquer(out float percentTeam1, out float percentTeam2)
     {
-        int cpt1 = 0;
-        int cpt2 = 0;
+        float cpt1 = 0;
+        float cpt2 = 0;
 
         for(int i =0; i < bitMap.Length; i++)
         {
@@ -257,8 +275,8 @@ public class MapManager : Singleton<MapManager> {
                 cpt2++;
         }
 
-        percentTeam1 = cpt1 / bitMap.Length;
-        percentTeam2 = cpt2 / bitMap.Length;
+        percentTeam1 = cpt1 / (float) bitMap.Length;
+        percentTeam2 = cpt2 / (float) bitMap.Length;
 
     }
 

@@ -129,6 +129,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011204214470, guid: 706891d97cd01ec4faa412457865559a,
+        type: 2}
+      propertyPath: initialGamePosition.x
+      value: -99
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011204214470, guid: 706891d97cd01ec4faa412457865559a,
+        type: 2}
+      propertyPath: initialGamePosition.y
+      value: -99
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 706891d97cd01ec4faa412457865559a, type: 2}
   m_IsPrefabParent: 0
