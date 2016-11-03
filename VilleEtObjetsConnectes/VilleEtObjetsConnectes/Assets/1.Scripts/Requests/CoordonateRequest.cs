@@ -45,7 +45,7 @@ public class CoordonateRequest : MonoBehaviour {
 
         var offsetX = _Shear_amount * Mathf.Abs(scaled.y);
         scaled.x = (pt_offset.x + offsetX) / _Width;
-        scaled.y = Mathf.Abs(scaled.y);
+        
         return scaled;
     }
 
@@ -106,7 +106,7 @@ public class CoordonateRequest : MonoBehaviour {
 
                     var newPosition = new Vector2();
                     newPosition.x = -8 + normalizedVector.x * 15;
-                    newPosition.y = -8 + (1 - normalizedVector.y) * 14;
+                    newPosition.y = -8 + (1-normalizedVector.y) * 14;
                     //normalizedVector.x = Mathf.Lerp(-8, 7, normalizedVector.x);
                     //normalizedVector.y = Mathf.Lerp(-8, 6, 1-Mathf.Abs(normalizedVector.y));
 

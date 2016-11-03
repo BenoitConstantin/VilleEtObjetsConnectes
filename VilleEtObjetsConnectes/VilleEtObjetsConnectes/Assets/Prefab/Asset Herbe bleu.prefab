@@ -1565,7 +1565,7 @@ ParticleSystem:
   moveWithTransform: 0
   autoRandomSeed: 0
   scalingMode: 1
-  randomSeed: 1111302376
+  randomSeed: 1111302400
   InitialModule:
     serializedVersion: 2
     enabled: 1
