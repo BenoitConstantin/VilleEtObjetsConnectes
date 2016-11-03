@@ -59,6 +59,21 @@ public class MapManager : Singleton<MapManager> {
     [SerializeField]
     Image timerFillingImage;
 
+    [Header("Score")]
+    [SerializeField]
+    Text ScoreTeamA;
+
+    [SerializeField]
+    Text ScoreTeamB;
+
+    [SerializeField]
+    public GameObject ScoreScreen;
+
+    [SerializeField]
+    GameObject TeamA;
+
+    [SerializeField]
+    GameObject TeamB;
 
     Vector2 translation;
     Vector2 columnTransformationMatrix1;
@@ -92,12 +107,19 @@ public class MapManager : Singleton<MapManager> {
         Vector2 columnTransformationMatrix2 = borderRightBot - borderLeftBot;
 
         gameManager = GameObject.Find("GameManager");
-
-        backgroundMusic.Play();
     }
 
+    private void MapManager_OnEndGame()
+    {
+        ScoreScreen.SetActive(true);
+    }
 
-
+    void Start()
+    {
+        backgroundMusic.Play();
+        team1Music.Play();
+        team2Music.Play();
+    }
 
     void Update()
     {
@@ -115,11 +137,41 @@ public class MapManager : Singleton<MapManager> {
         GetMapConquer(out team1Score, out team2Score);
 
         float deltaScore = team1Score - team2Score;
+        _UpdateScoreScreen(team1Score, team2Score);
 
         team1Music.volume = audioCurve.Evaluate(0.5f + deltaScore);
         team2Music.volume = audioCurve.Evaluate(0.5f - deltaScore);
+
+
     }
 
+    private void _UpdateScoreScreen(float team1Score, float team2Score)
+    {
+        var scoreAFloor = Mathf.FloorToInt(team1Score);
+        var scoreBFloor = Mathf.FloorToInt(team2Score);
+
+        if (scoreAFloor == 50)
+        {
+            ScoreTeamA.text = "50.1%";
+            ScoreTeamB.text = "49.9%";
+        }
+        else
+        {
+            ScoreTeamA.text = scoreAFloor + "%";
+            ScoreTeamB.text = scoreBFloor + "%";
+        }
+
+        if (team1Score > team2Score)
+        {
+            TeamA.SetActive(true);
+            TeamB.SetActive(false);
+        }
+        else
+        {
+            TeamA.SetActive(false);
+            TeamB.SetActive(true);
+        }
+    }
 
     public void Conquer(Vector2 position, int teamId)
     {
@@ -162,7 +214,6 @@ public class MapManager : Singleton<MapManager> {
             flowers[index] = flower;
         }
     }
-
 
     void SendBitMap()
     {

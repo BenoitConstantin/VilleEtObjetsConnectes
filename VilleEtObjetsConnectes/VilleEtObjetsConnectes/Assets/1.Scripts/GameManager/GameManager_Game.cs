@@ -52,6 +52,7 @@ public class GameManager_Game : GameManagerState
 
         if(gameManager.gameTimer <= 0)
         {
+            
             this.stateMachine.ChangeState("End");
         }
     }
@@ -73,7 +74,4 @@ public class GameManager_Game : GameManagerState
     {
         return false;
     }
-
-
-
 }

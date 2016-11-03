@@ -11,8 +11,10 @@ public class GameManager_End : GameManagerState {
     public override void OnActivation(string previousState, string info = "")
     {
         base.OnActivation(previousState, info);
+
+        var mapManager = GameObject.FindObjectOfType(typeof(MapManager)) as MapManager;
+        mapManager.ScoreScreen.SetActive(true);
         this.stateMachine.ChangeState("TouchToPlay");
-        SceneManager.LoadScene("TouchToPlay");
     }
 
     public override void OnDesactivation(string nextState, string info = "")
