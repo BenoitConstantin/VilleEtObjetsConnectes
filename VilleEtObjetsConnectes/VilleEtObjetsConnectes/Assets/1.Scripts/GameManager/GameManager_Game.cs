@@ -31,7 +31,7 @@ public class GameManager_Game : GameManagerState
             else
             {
                 p.ValidPosition(true);
-                MapManager.Instance.Conquer(new Vector2(position.x, position.z), p.TeamId);
+                MapManager.Instance.Conquer(p.NormalizedPosition, p.TeamId);
             }
         }
 

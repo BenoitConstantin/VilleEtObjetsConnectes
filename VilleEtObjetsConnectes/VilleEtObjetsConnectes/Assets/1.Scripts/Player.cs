@@ -43,6 +43,8 @@ public class Player : MonoBehaviour {
     float targetTime;
     #endregion
 
+    public Vector2 NormalizedPosition { get; private set; }
+
     public int Id
     {
         get { return id; }
@@ -66,16 +68,14 @@ public class Player : MonoBehaviour {
         trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
 
-    public void MoveTo(Vector2 position, float deltaTime, bool directPos = false)
+    public void MoveTo(Vector2 position, Vector2 normalizedPosition, float deltaTime, bool directPos = false)
     {
+        NormalizedPosition = normalizedPosition;
+
         if (targetPos != default(Vector2) && !targetPos.Equals(position) && !directPos)
-        {
             targetPos = position;
-        }
         else
-        {
             transform.position = new Vector3(position.x, transform.position.y, position.y);
-        }
 
         targetTime = deltaTime;
     }
@@ -85,9 +85,7 @@ public class Player : MonoBehaviour {
     {
         //Debug.Log(targetTime);
         if(targetPos != default(Vector2))
-        {
             transform.position = Vector3.Lerp(transform.position,new Vector3(targetPos.x, transform.position.y,targetPos.y), 1f/targetTime *Time.deltaTime);
-        }
     }
 
     public void ValidPosition(bool isValid)

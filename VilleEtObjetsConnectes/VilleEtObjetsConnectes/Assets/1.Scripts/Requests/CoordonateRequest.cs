@@ -45,6 +45,7 @@ public class CoordonateRequest : MonoBehaviour {
 
         var offsetX = _Shear_amount * Mathf.Abs(scaled.y);
         scaled.x = (pt_offset.x + offsetX) / _Width;
+        scaled.y = Mathf.Abs(scaled.y);
         return scaled;
     }
 
@@ -103,12 +104,15 @@ public class CoordonateRequest : MonoBehaviour {
                 {
                     var normalizedVector = _GetNormalizedCoordinates(new Vector2(JNode[i]["x"].AsFloat, JNode[i]["y"].AsFloat));
 
-                    normalizedVector.x = (normalizedVector.x - 0.5f) * 18;
-                    normalizedVector.y = (normalizedVector.y - 0.5f) * 18;
-                    normalizedVector.y *= -1;
+                    var newPosition = new Vector2();
+                    newPosition.x = -8 + normalizedVector.x * 15;
+                    newPosition.y = -8 + (1 - normalizedVector.y) * 14;
+                    //normalizedVector.x = Mathf.Lerp(-8, 7, normalizedVector.x);
+                    //normalizedVector.y = Mathf.Lerp(-8, 6, 1-Mathf.Abs(normalizedVector.y));
+
 
                     //Apply transformation matrix to GPS coordonate
-                    p.MoveTo(normalizedVector, deltaTime/1000);
+                    p.MoveTo(newPosition, normalizedVector, deltaTime/1000);
                 }
             }
         } 

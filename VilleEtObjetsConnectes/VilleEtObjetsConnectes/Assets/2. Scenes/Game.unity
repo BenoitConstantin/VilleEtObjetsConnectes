@@ -231,15 +231,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWidth: 25
   gridLength: 25
-  mapWidth: 18
-  mapHeight: 18
+  mapWidth: 15
+  mapHeight: 14
   teamScriptableObject: {fileID: 11400000, guid: a1d4fc74c20d3c3409be3553bd3c5443,
     type: 2}
   sendingTime: 0.25
-  borderLeftTop: {x: -9, y: 9}
-  borderRightTop: {x: 9, y: 9}
-  borderLeftBot: {x: -9, y: -9}
-  borderRightBot: {x: 9, y: -9}
+  borderLeftTop: {x: -8, y: 6}
+  borderRightTop: {x: 7, y: 6}
+  borderLeftBot: {x: -8, y: -8}
+  borderRightBot: {x: 7, y: -8}
   backgroundMusic: {fileID: 947960650}
   team1Music: {fileID: 1945621533}
   team2Music: {fileID: 1121763569}
@@ -265,6 +265,7 @@ MonoBehaviour:
   ScoreScreen: {fileID: 1664767838}
   TeamA: {fileID: 2036054255}
   TeamB: {fileID: 2075045649}
+  bitMap: 
 --- !u!65 &90420030
 BoxCollider:
   m_ObjectHideFlags: 0
