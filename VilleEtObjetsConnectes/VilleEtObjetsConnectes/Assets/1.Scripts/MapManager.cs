@@ -192,11 +192,7 @@ public class MapManager : Singleton<MapManager> {
     }
 
     public void Conquer(Vector2 normalizedPosition, int teamId)
-    {
-        var playerPosition = new Vector2();
-        playerPosition.x = normalizedPosition.x * (gridWidth-1);
-        playerPosition.y = normalizedPosition.y * (gridLength - 1);
-        
+    {        
         if (normalizedPosition.x > 1 || normalizedPosition.y > 1 || normalizedPosition.x < 0 || normalizedPosition.y < 0)
             return;
         int index = (int)(normalizedPosition.y*(gridLength-1))*gridWidth + (int)(normalizedPosition.x*gridWidth);
