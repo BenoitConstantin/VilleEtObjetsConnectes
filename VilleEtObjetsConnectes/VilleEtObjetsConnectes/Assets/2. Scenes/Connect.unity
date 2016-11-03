@@ -1008,8 +1008,8 @@ MonoBehaviour:
   - {fileID: 1927894735}
   - {fileID: 1024048011}
   teamcolors:
-  - {fileID: 1071713800}
   - {fileID: 1818306324}
+  - {fileID: 1071713800}
   TeamColor: {fileID: 11400000, guid: a1d4fc74c20d3c3409be3553bd3c5443, type: 2}
 --- !u!1 &1008528277
 GameObject:
